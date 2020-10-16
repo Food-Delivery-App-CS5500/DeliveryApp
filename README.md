@@ -20,7 +20,7 @@ A recent Gradle (>= 6.1.1 but < 7.0.0) and JDK 8.
 
 The server will start on port 5000 by default.
 
-## Deploying to Heroku
+## Deploying to Heroku.
 
 Configure as normal and use `git push heroku main`.
 
