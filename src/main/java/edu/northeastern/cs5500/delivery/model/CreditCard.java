@@ -39,7 +39,7 @@ public class CreditCard {
      * @return LocalDate - representing card expiration date.
      */
     public LocalDate getExpDate() {
-        return this.getExpDate;
+        return this.expirationDate;
     }
 }
 
