@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * retrieve any fields in this class or create a new review object.
  */
 public class Review {
-    private Interger reviewId;
+    private Integer reviewId;
     private String userName;
     private Integer restaurantId;
     private LocalDate createdTime;
