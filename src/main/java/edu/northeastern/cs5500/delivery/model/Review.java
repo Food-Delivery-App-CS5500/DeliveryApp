@@ -23,7 +23,7 @@ public class Review {
     public Review(Integer reviewId, String userName, Integer restaurantId, LocalDate createdTime, String comment, Double rating) {
         this.reviewId = reviewId;
         this.userName = userName;
-        this.restaurant = restaurantId;
+        this.restaurantId = restaurantId;
         this.createdTime = createdTime;
         this.comment = comment;
         this.rating = rating;
