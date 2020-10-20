@@ -22,10 +22,9 @@ public class Restaurant {
     /*
     * Restaurant Constructor
     */
-    // @Inject (?)
     public Restaurant(Integer restaurantId, String restaurantName) {
         this.restaurantId = restaurantId;
-        this.restaurantName = restaurantName
+        this.restaurantName = restaurantName;
         this.isActive = true;
     }
 
@@ -40,7 +39,7 @@ public class Restaurant {
     * Restaurant Menu setter/edit
     */
     public void setRestaurantMenu(String restaurantMenu) {
-        this.restaurantMenu = restaurantMenu
+        this.restaurantMenu = restaurantMenu;
     }
 
     /*
@@ -106,6 +105,5 @@ public class Restaurant {
     public void setRestaurantZipCode(Integer zipCode) {
         this.zipCode = zipCode;
     }
-
 
 }
