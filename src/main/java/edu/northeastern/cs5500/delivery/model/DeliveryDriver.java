@@ -19,9 +19,9 @@ public class DeliveryDriver extends Person{
     /**
      * Constructor for DeliveryDriver
      */
-    public DeliveryDriver(Integer DeliveryId, Integer RestaurantId, Integer OrderId, LocalDate PickUpTime, LocalDate DeliveredTime) {
+    public DeliveryDriver(String username, String firstName, String lastName, String email, Integer phoneNumber, Integer DeliveryId, Integer RestaurantId, Integer OrderId, LocalDate PickUpTime, LocalDate DeliveredTime) {
         super(username, firstName, lastName, email, phoneNumber);
-        this.DeliveryId = DliveryId;
+        this.DeliveryId = DeliveryId;
         this.RestaurantId = RestaurantId;
         this.OrderId = OrderId;
         this.PickUpTime = PickUpTime;
