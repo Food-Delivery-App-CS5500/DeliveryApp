@@ -97,7 +97,7 @@ public class DeliveryDriver extends Person{
      * @param LocalDate - representing PickUpTime
      */
     public void setPickUpTime(LocalDate PickUpTime) {
-        this.PickUpTime = PickUpTime
+        this.PickUpTime = PickUpTime;
     }
 
     /**
@@ -105,6 +105,6 @@ public class DeliveryDriver extends Person{
      * @param LocalDate - representing DeliveredTime
      */
     public void setDeliveredTime(LocalDate DeliveredTime) {
-        this.DeliveredTime = DeliveredTime
+        this.DeliveredTime = DeliveredTime;
     }
 }
