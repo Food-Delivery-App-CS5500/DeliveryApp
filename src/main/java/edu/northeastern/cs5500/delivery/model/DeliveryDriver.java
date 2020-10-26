@@ -64,7 +64,7 @@ public class DeliveryDriver extends Person{
      * Return the DeliveredTime
      * @return LocalDate - representing DeliveredTime
      */
-    public LcalDate getDeliveredTime() {
+    public LocalDate getDeliveredTime() {
         return this.DeliveredTime;
     }
     
