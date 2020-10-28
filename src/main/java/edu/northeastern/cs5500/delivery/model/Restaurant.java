@@ -1,14 +1,15 @@
 package edu.northeastern.cs5500.delivery.model;
 
-import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
-// import dagger.Module;
-// import dagger.Provides;
 
 @Data
-public class Restaurant {
+@Getter
+@Setter
+public class Restaurant implements Model {
     private Integer restaurantId;
     private String restaurantName;
     private String restaurantDescription;
@@ -21,14 +22,11 @@ public class Restaurant {
     private String city;
     private String state;
     private Integer zipCode;
+    private ObjectId id;
 
-    /*
-    * Restaurant Constructor
-    */
-    public Restaurant(Integer restaurantId, String restaurantName) {
-        this.restaurantId = restaurantId;
-        this.restaurantName = restaurantName;
-        this.isActive = true;
+    /** @return true if this restaurant is valid */
+    @JsonIgnore
+    public boolean isValid() {
+        return isActive == true;
     }
-
 }

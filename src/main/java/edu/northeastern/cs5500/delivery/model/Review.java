@@ -1,13 +1,10 @@
 package edu.northeastern.cs5500.delivery.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import org.bson.types.ObjectId;
 import java.time.LocalDate;
 
 /**
- * This is a class representing a review object. Users should be able to 
- * retrieve any fields in this class or create a new review object.
+ * This is a class representing a review object. Users should be able to retrieve any fields in this
+ * class or create a new review object.
  */
 public class Review {
     private Integer reviewId;
@@ -17,10 +14,14 @@ public class Review {
     private String comment;
     private Double rating;
 
-    /**
-     * Constructor for a Review object
-     */
-    public Review(Integer reviewId, String userName, Integer restaurantId, LocalDate createdTime, String comment, Double rating) {
+    /** Constructor for a Review object */
+    public Review(
+            Integer reviewId,
+            String userName,
+            Integer restaurantId,
+            LocalDate createdTime,
+            String comment,
+            Double rating) {
         this.reviewId = reviewId;
         this.userName = userName;
         this.restaurantId = restaurantId;
@@ -31,6 +32,7 @@ public class Review {
 
     /**
      * Pass in a string to set it as the comment for the review.
+     *
      * @param String - user's comment for the review
      */
     public void setComment(String userComment) {
@@ -39,15 +41,16 @@ public class Review {
 
     /**
      * Pass in a double to set it as the rating for the review.
+     *
      * @param Double - user's rating for the review
      */
     public void setRating(Double userRating) {
         this.rating = userRating;
     }
-    
-    
+
     /**
      * Return the reviewId.
+     *
      * @return Integer - representing reviewId
      */
     public Integer getReviewId() {
@@ -56,6 +59,7 @@ public class Review {
 
     /**
      * Return the userName who created this review.
+     *
      * @return String - representing userName
      */
     public String getUserName() {
@@ -64,6 +68,7 @@ public class Review {
 
     /**
      * Return the restaurantId that is being reviewed.
+     *
      * @return Integer - representing restaurantId
      */
     public Integer getRestaurantId() {
@@ -72,6 +77,7 @@ public class Review {
 
     /**
      * Return the date when the review was created.
+     *
      * @return LocalDate - representing createdTime
      */
     public LocalDate getCreatedTime() {
@@ -80,6 +86,7 @@ public class Review {
 
     /**
      * Return the cotent of this review.
+     *
      * @return String - representing comment
      */
     public String getCommet() {
@@ -88,6 +95,7 @@ public class Review {
 
     /**
      * Return the rating of this review.
+     *
      * @return Double - representing rating
      */
     public Double getRating() {
