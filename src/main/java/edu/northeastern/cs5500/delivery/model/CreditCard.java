@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
  * This is a class representing a creditcard object. It contains an integer of cardnumber,
  * a string of userName and a LocalDate to store expirationDate.
  */
+@Data // Create compile time dependency with setter and getter
 public class CreditCard {
     private Integer cardNumber;
     private String userName;
@@ -18,12 +19,19 @@ public class CreditCard {
      * Constructor for a creditcard
      * 
      */
+    '''
     public CreditCard(Integer cardNumber, String userName, LocalDate expirationDate) {
         this.cardNumber = cardNumber;
         this.userName = userName;
         this.expirationDate = expirationDate;
     }
-
+    '''
+    
+    @JsonIgnore
+    public boolean isValid() {
+        return cardNumber != null && expiratrionDate != null && userName != null;
+    }
+    '''
     /**
      * Return the creditCard number
      * @return Integer - representing card number
@@ -47,4 +55,5 @@ public class CreditCard {
     public LocalDate getExpDate() {
         return this.expirationDate;
     }
+    '''
 }
