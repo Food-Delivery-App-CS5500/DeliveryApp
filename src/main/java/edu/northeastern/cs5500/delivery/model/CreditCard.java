@@ -18,7 +18,7 @@ public class CreditCard {
     /** @return true if this credit card is valid */
     @JsonIgnore
     public boolean isValid() {
-        return cardNumber != null && !cardNumber.isEmpty() and expirationDate != null && !expirationDate.isEmpty()
+        return cardNumber != null && !cardNumber.isEmpty() && expirationDate != null && !expirationDate.isEmpty();
     }
     '''
     /** Constructor for a creditcard */
