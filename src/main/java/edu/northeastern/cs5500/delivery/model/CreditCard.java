@@ -3,6 +3,7 @@ package edu.northeastern.cs5500.delivery.model;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.bson.types.ObjectId;
 
 /**
  * This is a class representing a creditcard object. It contains an integer of cardnumber, a string
