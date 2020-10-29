@@ -105,6 +105,7 @@ spotless {
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()
+        paddedCell()
     }
     java {
         targetExclude 'build/**'
