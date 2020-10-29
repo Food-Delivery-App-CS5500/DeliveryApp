@@ -54,7 +54,7 @@ public class CreditCardController {
         //call creditcard
         //check cardNum has the right length and call number then return
         log.debug("CreditCardController > getCard({})", cardNum);
-        return creditCards.get(cardNum)
+        return creditCards.get(cardNum);
     }
 
     @Nonnull
@@ -71,9 +71,8 @@ public class CreditCardController {
         if (!creditCard.isValid()) {
             throw new Exception("Can NOT add a credit card");
         }
-        Integer cardNumber = creditCard.getCardNumber()
+        Integer cardNumber = creditCard.getCardNumber();
         if (cardNumber != null && creditCards.get(cardNumber) != null) {
-            // TODO: replace with a real duplicate key exception
             throw new Exception("CreditCardDuplicateKeyException");
         }
         return creditCards.add(creditCard);
