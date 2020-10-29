@@ -20,42 +20,5 @@ public class CreditCard {
     public boolean isValid() {
         return cardNumber != null && !cardNumber.isEmpty() && expirationDate != null && !expirationDate.isEmpty();
     }
-    '''
-    /** Constructor for a creditcard */
-    public CreditCard(Integer cardNumber, String userName, LocalDate expirationDate) {
-        this.cardNumber = cardNumber;
-        this.userName = userName;
-        this.expirationDate = expirationDate;
-    }
-
-    /**
-     * Return the creditCard number
-     *
-     * @return Integer - representing card number
-     */
-    public Integer getCardNumber() {
-        return this.cardNumber;
-    }
-
-    /**
-     * Return the userName
-     *
-     * @return String - representing userName
-     */
-    public String getUserName() {
-        return this.userName;
-    }
-
-    /**
-     * Return the expiration date.
-     *
-     * @return LocalDate - representing card expiration date.
-     */
-    public LocalDate getExpDate() {
-        return this.expirationDate;
-    }
-    '''
-}
-
 }
 
