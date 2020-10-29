@@ -9,7 +9,8 @@ import lombok.Data;
  * of userName and a LocalDate to store expirationDate.
  */
 @Data
-public class CreditCard {
+public class CreditCard implements Model{
+    private ObjectId id;
     private Integer cardNumber;
     private String userName;
     private LocalDate expirationDate;
