@@ -41,8 +41,8 @@ public class CreditCardController {
         defaultCreditCard2.setExpirationDate(date);
 
         try {
-            addCreditCard(defaultCreditCard1)
-            addCreditCard(defaultCreditCard2)
+            addCreditCard(defaultCreditCard1);
+            addCreditCard(defaultCreditCard2);
         } catch (Exception e) {
             log.error("DeliveryController > construct > adding default deliverys > failure?");
             e.printStackTrace();
@@ -67,8 +67,6 @@ public class CreditCardController {
 
     @Nonnull
     public CreditCard addCreditCard(@Nonnull CreditCard creditCard) throws Exception {
-        // isValid() from CreditCard class
-        //else throw exception
         log.debug("CreditCardController > addCreditCard(...)");
         if (!creditCard.isValid()) {
             throw new Exception("Can NOT add a credit card");
