@@ -62,7 +62,7 @@ public class CreditCardController {
         //call creditcard
         //check cardNum has the right length and call number then return
         log.debug("CreditCardController > getAllCards({})");
-        return creditCards.getAll()
+        return creditCards.getAll();
     }
 
     @Nonnull
@@ -76,7 +76,7 @@ public class CreditCardController {
             // TODO: replace with a real duplicate key exception
             throw new Exception("CreditCardDuplicateKeyException");
         }
-        return creditCards.add(creditCard)
+        return creditCards.add(creditCard);
     }
 
     public CreditCard updateCreditCard(@Nonnull CreditCard creditCard) throws Exception{
