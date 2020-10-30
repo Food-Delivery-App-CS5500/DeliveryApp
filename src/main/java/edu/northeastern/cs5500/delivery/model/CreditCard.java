@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.delivery.model;
 
-import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.time.LocalDate;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
@@ -16,11 +16,9 @@ public class CreditCard implements Model{
     private String userName;
     private LocalDate expirationDate;
 
-
     /** @return true if this credit card is valid */
     @JsonIgnore
     public boolean isValid() {
         return cardNumber != null && expirationDate != null && !userName.isEmpty();
     }
 }
-

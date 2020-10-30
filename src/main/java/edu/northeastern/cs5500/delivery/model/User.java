@@ -1,6 +1,16 @@
 package edu.northeastern.cs5500.delivery.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.bson.types.ObjectId;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class User extends Person {
+    private ObjectId id;
     private String address;
     private String city;
     private String state;
@@ -23,59 +33,17 @@ public class User extends Person {
         this.zip = zip;
     }
 
-    /**
-     * Getter for address
-     *
-     * @return address as a string
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * getter for city
-     *
-     * @return city as a string
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * getter for state
-     *
-     * @return state as a string
-     */
-    public String getState() {
-        return state;
-    }
-
-    /**
-     * getter for zip
-     *
-     * @return zip as a string
-     */
-    public String getZip() {
-        return zip;
-    }
-
-    /** sets address based on method argument */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /** sets city based on method argument */
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    /** sets state based on method argument */
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    /** sets zip based on method argument */
-    public void setZip(String zip) {
-        this.zip = zip;
+    /** @return true if this User is valid */
+    @JsonIgnore
+    public boolean isValid() {
+        return !username.isEmpty()
+                && !firstName.isEmpty()
+                && !lastName.isEmpty()
+                && !email.isEmpty()
+                && Integer.toString(phoneNumber).length() == 10
+                && !address.isEmpty()
+                && !city.isEmpty()
+                && !state.isEmpty()
+                && !zip.isEmpty();
     }
 }
