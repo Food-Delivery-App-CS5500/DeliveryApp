@@ -1,10 +1,16 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 
+import org.bson.types.ObjectId;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class User extends Person {
+    private ObjectId id;
     private String address;
     private String city;
     private String state;

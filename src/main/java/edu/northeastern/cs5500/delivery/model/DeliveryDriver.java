@@ -1,13 +1,20 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.bson.types.ObjectId;
+import lombok.EqualsAndHashCode;
+import lombok.Data;
 
 /**
  * This is a class representing a delivery driver object. A driver should be able to view the order
  * and set pick up and delivered time. A driver inherits from a Person class.
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
+
 public class DeliveryDriver extends Person {
-    private Integer DeliveryId;
+    private ObjectId Id;
     private Integer RestaurantId;
     private Integer OrderId;
     private LocalDate PickUpTime;
@@ -20,106 +27,27 @@ public class DeliveryDriver extends Person {
             String lastName,
             String email,
             Integer phoneNumber,
-            Integer DeliveryId,
+            ObjectId Id,
             Integer RestaurantId,
             Integer OrderId,
             LocalDate PickUpTime,
             LocalDate DeliveredTime) {
         super(username, firstName, lastName, email, phoneNumber);
-        this.DeliveryId = DeliveryId;
+        this.Id = Id;
         this.RestaurantId = RestaurantId;
         this.OrderId = OrderId;
         this.PickUpTime = PickUpTime;
         this.DeliveredTime = DeliveredTime;
     }
 
-    /**
-     * Return the DeliveryId
-     *
-     * @return Integer - representing DeliveryId
-     */
-    public Integer getDeliveryId() {
-        return this.DeliveryId;
-    }
-
-    /**
-     * Return the RestaurantId
-     *
-     * @return Integer - representing RestaurantId
-     */
-    public Integer getRestaurantId() {
-        return this.RestaurantId;
-    }
-
-    /**
-     * Return the OrderId
-     *
-     * @return Integer - representing OrderId
-     */
-    public Integer getOrderId() {
-        return this.OrderId;
-    }
-
-    /**
-     * Return the PickUpTime
-     *
-     * @return LocalDate - representing PickUpTime
-     */
-    public LocalDate getPickUpTime() {
-        return this.PickUpTime;
-    }
-
-    /**
-     * Return the DeliveredTime
-     *
-     * @return LocalDate - representing DeliveredTime
-     */
-    public LocalDate getDeliveredTime() {
-        return this.DeliveredTime;
-    }
-
-    /**
-     * Set DeliveryId
-     *
-     * @param Integer - representing DeliveryId
-     */
-    public void setDeliveryId(Integer DeliveryId) {
-        this.DeliveryId = DeliveryId;
-    }
-
-    /**
-     * Set RestaurantId
-     *
-     * @param Integer - representing RestaurantId
-     */
-    public void setRestaurantId(Integer RestaurantId) {
-        this.RestaurantId = RestaurantId;
-    }
-
-    /**
-     * Set OrderId
-     *
-     * @param Integer - representing OrderId
-     */
-    public void setOrderId(Integer OrderId) {
-        this.OrderId = OrderId;
-    }
-
-    /**
-     * Set PickUpTime
-     *
-     * @param LocalDate - representing PickUpTime
-     */
-    public void setPickUpTime(LocalDate PickUpTime) {
-        this.PickUpTime = PickUpTime;
-    }
-
-    /**
-     * Set DeliveredTime
-     *
-     * @param LocalDate - representing DeliveredTime
-     */
-    public void setDeliveredTime(LocalDate DeliveredTime) {
-        this.DeliveredTime = DeliveredTime;
+    /** @return true if this User is valid */
+    @JsonIgnore
+    public boolean isValid() {
+        return !username.isEmpty()
+                && !firstName.isEmpty()
+                && !lastName.isEmpty()
+                && Integer.toString(phoneNumber).length() == 10
+                && !email.isEmpty()
+                && OrderId != null;
     }
 }
