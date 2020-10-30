@@ -15,8 +15,8 @@ import lombok.Data;
 
 public class DeliveryDriver extends Person {
     private ObjectId Id;
-    private Integer RestaurantId;
-    private Integer OrderId;
+    private ObjectId RestaurantId;
+    private ObjectId OrderId;
     private LocalDate PickUpTime;
     private LocalDate DeliveredTime;
 
@@ -28,16 +28,17 @@ public class DeliveryDriver extends Person {
             String email,
             Integer phoneNumber,
             ObjectId Id,
-            Integer RestaurantId,
-            Integer OrderId,
-            LocalDate PickUpTime,
-            LocalDate DeliveredTime) {
+            // ObjectId RestaurantId,
+            ObjectId OrderId)
+            // LocalDate PickUpTime,
+            // LocalDate DeliveredTime
+             {
         super(username, firstName, lastName, email, phoneNumber);
         this.Id = Id;
-        this.RestaurantId = RestaurantId;
+        // this.RestaurantId = RestaurantId;
         this.OrderId = OrderId;
-        this.PickUpTime = PickUpTime;
-        this.DeliveredTime = DeliveredTime;
+        // this.PickUpTime = PickUpTime;
+        // this.DeliveredTime = DeliveredTime;
     }
 
     /** @return true if this User is valid */
@@ -47,7 +48,6 @@ public class DeliveryDriver extends Person {
                 && !firstName.isEmpty()
                 && !lastName.isEmpty()
                 && Integer.toString(phoneNumber).length() == 10
-                && !email.isEmpty()
-                && OrderId != null;
+                && !email.isEmpty();
     }
 }

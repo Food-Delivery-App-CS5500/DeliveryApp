@@ -16,7 +16,7 @@ import lombok.Data;
 public class Review implements Model{
     private ObjectId id;
     private String userName;
-    private Integer restaurantId;
+    private ObjectId restaurantId;
     private LocalDate createdTime;
     private String comment;
     private Double rating;
@@ -25,7 +25,7 @@ public class Review implements Model{
     public Review(
             ObjectId id,
             String userName,
-            Integer restaurantId, // Should this be ObjectID?
+            ObjectId restaurantId, // Should this be ObjectID?
             LocalDate createdTime,
             String comment,
             Double rating) {
