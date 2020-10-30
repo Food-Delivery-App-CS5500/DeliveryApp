@@ -1,11 +1,11 @@
 package edu.northeastern.cs5500.delivery.model;
 
 abstract class Person {
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Integer phoneNumber;
+    protected String username;
+    protected String firstName;
+    protected String lastName;
+    protected String email;
+    protected Integer phoneNumber;
 
     /** Constructor for Person */
     public Person(

@@ -1,25 +1,30 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import java.time.LocalDate;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import org.bson.types.ObjectId;
 
 /**
- * This is a class representing a delivery driver object. A driver should be able to
- * view the order and set pick up and delivered time. A driver inherits from a Person class.
+ * This is a class representing a delivery driver object. A driver should be able to view the order
+ * and set pick up and delivered time. A driver inherits from a Person class.
  */
-public class DeliveryDriver extends Person{
+public class DeliveryDriver extends Person {
     private Integer DeliveryId;
     private Integer RestaurantId;
     private Integer OrderId;
     private LocalDate PickUpTime;
     private LocalDate DeliveredTime;
 
-    /**
-     * Constructor for DeliveryDriver
-     */
-    public DeliveryDriver(String username, String firstName, String lastName, String email, Integer phoneNumber, Integer DeliveryId, Integer RestaurantId, Integer OrderId, LocalDate PickUpTime, LocalDate DeliveredTime) {
+    /** Constructor for DeliveryDriver */
+    public DeliveryDriver(
+            String username,
+            String firstName,
+            String lastName,
+            String email,
+            Integer phoneNumber,
+            Integer DeliveryId,
+            Integer RestaurantId,
+            Integer OrderId,
+            LocalDate PickUpTime,
+            LocalDate DeliveredTime) {
         super(username, firstName, lastName, email, phoneNumber);
         this.DeliveryId = DeliveryId;
         this.RestaurantId = RestaurantId;
@@ -30,6 +35,7 @@ public class DeliveryDriver extends Person{
 
     /**
      * Return the DeliveryId
+     *
      * @return Integer - representing DeliveryId
      */
     public Integer getDeliveryId() {
@@ -38,6 +44,7 @@ public class DeliveryDriver extends Person{
 
     /**
      * Return the RestaurantId
+     *
      * @return Integer - representing RestaurantId
      */
     public Integer getRestaurantId() {
@@ -46,30 +53,34 @@ public class DeliveryDriver extends Person{
 
     /**
      * Return the OrderId
+     *
      * @return Integer - representing OrderId
      */
     public Integer getOrderId() {
         return this.OrderId;
     }
-    
+
     /**
      * Return the PickUpTime
+     *
      * @return LocalDate - representing PickUpTime
      */
     public LocalDate getPickUpTime() {
         return this.PickUpTime;
     }
-    
+
     /**
      * Return the DeliveredTime
+     *
      * @return LocalDate - representing DeliveredTime
      */
     public LocalDate getDeliveredTime() {
         return this.DeliveredTime;
     }
-    
+
     /**
      * Set DeliveryId
+     *
      * @param Integer - representing DeliveryId
      */
     public void setDeliveryId(Integer DeliveryId) {
@@ -78,6 +89,7 @@ public class DeliveryDriver extends Person{
 
     /**
      * Set RestaurantId
+     *
      * @param Integer - representing RestaurantId
      */
     public void setRestaurantId(Integer RestaurantId) {
@@ -86,6 +98,7 @@ public class DeliveryDriver extends Person{
 
     /**
      * Set OrderId
+     *
      * @param Integer - representing OrderId
      */
     public void setOrderId(Integer OrderId) {
@@ -94,6 +107,7 @@ public class DeliveryDriver extends Person{
 
     /**
      * Set PickUpTime
+     *
      * @param LocalDate - representing PickUpTime
      */
     public void setPickUpTime(LocalDate PickUpTime) {
@@ -102,6 +116,7 @@ public class DeliveryDriver extends Person{
 
     /**
      * Set DeliveredTime
+     *
      * @param LocalDate - representing DeliveredTime
      */
     public void setDeliveredTime(LocalDate DeliveredTime) {
