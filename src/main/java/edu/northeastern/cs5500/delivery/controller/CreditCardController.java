@@ -79,12 +79,12 @@ public class CreditCardController {
         LocalDate expDate = creditCard.getExpirationDate();
         // iterate through all objects in the collection to check if there are duplicate creditcard
         // number
-        Set<CreditCard> allCreditCards = creditCards.getAll();
-        for (CreditCard card: allCreditCards) {
-            if (card.getCardNumber() == cardnumber && card.getExpirationDate() != expDate) {
-                throw new Exception("CreditCard");
-            }
-        }
+        // Set<CreditCard> allCreditCards = creditCards.getAll();
+        // for (CreditCard card: allCreditCards) {
+        //     if (card.getCardNumber() == cardnumber && card.getExpirationDate() != expDate) {
+        //         throw new Exception("CreditCard");
+        //     }
+        // }
 
         if (checkExpirationDate(creditCard) < 0) {
             throw new Exception("Invliad expiration date!");
