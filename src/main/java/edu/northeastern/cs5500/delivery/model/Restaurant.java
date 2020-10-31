@@ -1,19 +1,19 @@
 package edu.northeastern.cs5500.delivery.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.bson.types.ObjectId;
 
 @Data
-@Getter
-@Setter
+
 public class Restaurant implements Model {
-    private Integer restaurantId;
+    private ObjectId id;
     private String restaurantName;
     private String restaurantDescription;
-    private String restaurantMenu;
+    private HashMap<String, Double> restaurantMenu;
     private String listedHours;
     private CuisineType cuisineType;
     private Boolean isActive;
@@ -22,11 +22,10 @@ public class Restaurant implements Model {
     private String city;
     private String state;
     private Integer zipCode;
-    private ObjectId id;
 
     /** @return true if this restaurant is valid */
     @JsonIgnore
     public boolean isValid() {
-        return isActive == true;
+        return (isActive == true) && (restaurantMenu.size() > 0);
     }
 }

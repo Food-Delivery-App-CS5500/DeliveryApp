@@ -61,14 +61,14 @@ public class DeliveryController {
         if (!delivery.isValid()) {
             // TODO: replace with a real invalid object exception
             // probably not one exception per object type though...
-            throw new Exception("InvalidDeliveryException");
+            throw new ExceptionClass("InvalidDeliveryException");
         }
 
         ObjectId id = delivery.getId();
 
         if (id != null && deliverys.get(id) != null) {
             // TODO: replace with a real duplicate key exception
-            throw new Exception("DuplicateKeyException");
+            throw new ExceptionClass("DuplicateKeyException");
         }
 
         return deliverys.add(delivery);
