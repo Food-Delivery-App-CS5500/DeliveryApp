@@ -2,21 +2,20 @@ package edu.northeastern.cs5500.delivery.controller;
 
 import edu.northeastern.cs5500.delivery.model.CreditCard;
 import edu.northeastern.cs5500.delivery.repository.GenericRepository;
+import java.time.LocalDate;
 import java.util.Collection;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
-import java.time.LocalDate;
 
 @Singleton
 @Slf4j
 public class CreditCardController {
     private final GenericRepository<CreditCard> creditCards;
 
-    @Inject //constructor for creditcard controller
+    @Inject // constructor for creditcard controller
     CreditCardController(GenericRepository<CreditCard> creditCardRepository) {
         creditCards = creditCardRepository;
 
@@ -50,17 +49,18 @@ public class CreditCardController {
     }
 
     @Nonnull
-    public CreditCard getCreditCard(@Nonnull Integer cardNum){
-        //call creditcard
-        //check cardNum has the right length and call number then return
-        log.debug("CreditCardController > getCard({})", cardNum);
-        return creditCards.get(cardNum);
+    public CreditCard getCreditCard(@Nonnull ObjectId id) throws Exception {
+        log.debug("CreditCardController > getCard({})", id);
+        if (creditCards.get(id) == null) {
+            throw new Exception("No such card exist.");
+        }
+        return creditCards.get(id);
     }
 
     @Nonnull
-    public Collection<CreditCard> getCreditCards(){
-        //call creditcard
-        //check cardNum has the right length and call number then return
+    public Collection<CreditCard> getCreditCards() {
+        // call creditcard
+        // check cardNum has the right length and call number then return
         log.debug("CreditCardController > getAllCards({})");
         return creditCards.getAll();
     }
@@ -71,24 +71,49 @@ public class CreditCardController {
         if (!creditCard.isValid()) {
             throw new Exception("Can NOT add a credit card");
         }
-        Integer cardNumber = creditCard.getCardNumber();
-        if (cardNumber != null && creditCards.get(cardNumber) != null) {
+        ObjectId id = creditCard.getId();
+        if (id != null && creditCards.get(id) != null) {
             throw new Exception("CreditCardDuplicateKeyException");
         }
+        Integer cardnumber = creditCard.getCardNumber();
+        LocalDate expDate = creditCard.getExpirationDate();
+        // iterate through all objects in the collection to check if there are duplicate creditcard
+        // number
+        Set<CreditCard> allCreditCards = creditCards.getAll();
+        for (CreditCard card: allCreditCards) {
+            if (card.getCardNumber() == cardnumber && card.getExpirationDate() != expDate) {
+                throw new Exception("CreditCard");
+            }
+        }
+
+        if (checkExpirationDate(creditCard) < 0) {
+            throw new Exception("Invliad expiration date!");
+        }
+
         return creditCards.add(creditCard);
     }
 
-    public CreditCard updateCreditCard(@Nonnull CreditCard creditCard) throws Exception{
+    public void updateCreditCard(@Nonnull CreditCard creditCard) throws Exception {
         log.debug("CreditCardController > updateCreditCard(...)");
+        
+        if (checkExpirationDate(creditCard) < 0) {
+            throw new Exception("Invliad expiration date!");
+        }
+
         creditCards.update(creditCard);
-
     }
 
-    public void delete(@Nonnull CreditCard creditCard) {
+    public void deleteCreditCard(@Nonnull ObjectId id) {
         log.debug("DeliveryController > deleteDelivery(...)");
-        creditCards.delete(creditCard);
+        creditCards.delete(id);
     }
 
-    //public long count();
+    private Integer checkExpirationDate(CreditCard creditCard) {
+        LocalDate expDate = creditCard.getExpirationDate();
+        LocalDate now = LocalDate.now();
+        return expDate.compareTo(now);
+    }
+
+    // public long count();
 
 }
