@@ -4,7 +4,6 @@ import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.repository.GenericRepository;
 import java.util.Collection;
 import java.util.HashMap;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;

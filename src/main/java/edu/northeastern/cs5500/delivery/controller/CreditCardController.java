@@ -10,15 +10,14 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 
-/**
- * This is a credit card controller class that add, delete, update and edit creditcard objects.
- */
+/** This is a credit card controller class that add, delete, update and edit creditcard objects. */
 @Singleton
 @Slf4j
 public class CreditCardController {
     private final GenericRepository<CreditCard> creditCards;
     /**
      * Contructor for creditcard controller using dagger.
+     *
      * @param creditCardRepository - a collection of creditcards.
      */
     @Inject
@@ -56,6 +55,7 @@ public class CreditCardController {
 
     /**
      * Retrieve a creditcard object from database.
+     *
      * @param id - object id of a creditcard object
      * @return CreditCard - return a creditcard object
      * @throws Exception - throws exception when object id does not exist in database
@@ -70,6 +70,7 @@ public class CreditCardController {
     }
     /**
      * Retrieve all creditcard objects from databse.
+     *
      * @return Collection<CreditCard> - return a collection of creditcards
      */
     @Nonnull
@@ -79,24 +80,25 @@ public class CreditCardController {
     }
     /**
      * Add a new creditcard object to database.
+     *
      * @param creditCard - a creditCard object
      * @return CreditCard - a added creditCard object
-     * @throws InvalidObjectException - throws exception when credit card info not valid.
-     * @throws DuplicateKeyException - throws when same credit card object already exists in databse.
+     * @throws Exception - throws exception when credit card info not valid or duplicate key in
+     *     database.
      */
     @Nonnull
-    public CreditCard addCreditCard(@Nonnull CreditCard creditCard) throws InvalidObjectException, DuplicateKeyException {
+    public CreditCard addCreditCard(@Nonnull CreditCard creditCard) throws Exception {
         log.debug("CreditCardController > addCreditCard(...)");
         if (!creditCard.isValid()) {
-            throw new InvalidObjectException("Can NOT add a credit card");
+            throw new ExceptionClass("Can NOT add a credit card");
         }
         ObjectId id = creditCard.getId();
         if (id != null && creditCards.get(id) != null) {
-            throw new DuplicateKeyException("CreditCardDuplicateKeyException");
+            throw new ExceptionClass("CreditCardDuplicateKeyException");
         }
-       
+
         if (checkCardNumLength(creditCard) != 16 || checkExpirationDate(creditCard) < 0) {
-            throw new InvalidObjectException("Invliad card number or expiration date!");
+            throw new ExceptionClass("Invliad card number or expiration date!");
         }
 
         return creditCards.add(creditCard);
@@ -104,20 +106,22 @@ public class CreditCardController {
 
     /**
      * Update information in a existing creditcard object.
+     *
      * @param creditCard - a creditCard object to update
-     * @throws InvalidObjectException - throws exception when credit card info not valid.
+     * @throws Exception - throws exception when credit card info not valid.
      */
-    public void updateCreditCard(@Nonnull CreditCard creditCard) throws InvalidObjectException {
+    public void updateCreditCard(@Nonnull CreditCard creditCard) throws Exception {
         log.debug("CreditCardController > updateCreditCard(...)");
-        
+
         if (checkCardNumLength(creditCard) != 16 || checkExpirationDate(creditCard) < 0) {
-            throw new InvalidObjectException("Invliad card number or expiration date!");
+            throw new ExceptionClass("Invliad card number or expiration date!");
         }
 
         creditCards.update(creditCard);
     }
     /**
      * Delete a creditcard object.
+     *
      * @param id - the object id of the creditcard being deleted.
      */
     public void deleteCreditCard(@Nonnull ObjectId id) {
@@ -126,9 +130,10 @@ public class CreditCardController {
     }
     /**
      * Check if the expiration date on credit card in valid.
+     *
      * @param creditCard - a creditCard object being checked.
-     * @return 0 if both dates are equal, positive value if “this date” is greater than the otherDate,
-     * otherwise negative value.
+     * @return 0 if both dates are equal, positive value if “this date” is greater than the
+     *     otherDate, otherwise negative value.
      */
     private Integer checkExpirationDate(CreditCard creditCard) {
         LocalDate expDate = creditCard.getExpirationDate();
@@ -137,6 +142,7 @@ public class CreditCardController {
     }
     /**
      * Check if the length of a creditcard number if 16 digits.
+     *
      * @param creditCard - a creditCard object being checked.
      * @return the length of the card number.
      */

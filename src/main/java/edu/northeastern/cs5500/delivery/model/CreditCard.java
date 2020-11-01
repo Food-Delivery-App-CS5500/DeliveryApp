@@ -10,7 +10,7 @@ import org.bson.types.ObjectId;
  * of userName and a LocalDate to store expirationDate.
  */
 @Data
-public class CreditCard implements Model{
+public class CreditCard implements Model {
     private ObjectId id;
     private Long cardNumber;
     private String userName;

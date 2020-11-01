@@ -1,8 +1,9 @@
 package edu.northeastern.cs5500.delivery.model;
+
 import lombok.Data;
 
 @Data
-abstract class Person implements Model{
+abstract class Person implements Model {
     protected String username;
     protected String firstName;
     protected String lastName;
