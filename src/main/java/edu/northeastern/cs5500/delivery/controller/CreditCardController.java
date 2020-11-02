@@ -5,6 +5,7 @@ import edu.northeastern.cs5500.delivery.repository.GenericRepository;
 import java.time.LocalDate;
 import java.util.Collection;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -60,14 +61,12 @@ public class CreditCardController {
      * @return CreditCard - return a creditcard object
      * @throws Exception - throws exception when object id does not exist in database
      */
-    @Nonnull
+    @Nullable
     public CreditCard getCreditCard(@Nonnull ObjectId id) throws Exception {
         log.debug("CreditCardController > getCard({})", id);
-        if (creditCards.get(id) == null) {
-            throw new Exception("No such card exist.");
-        }
         return creditCards.get(id);
     }
+
     /**
      * Retrieve all creditcard objects from databse.
      *
@@ -114,7 +113,7 @@ public class CreditCardController {
         log.debug("CreditCardController > updateCreditCard(...)");
 
         if (checkCardNumLength(creditCard) != 16 || checkExpirationDate(creditCard) < 0) {
-            throw new ExceptionClass("Invliad card number or expiration date!");
+            throw new ExceptionClass("Invalid card number or expiration date!");
         }
 
         creditCards.update(creditCard);
