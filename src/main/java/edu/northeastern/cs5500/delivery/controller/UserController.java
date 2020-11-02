@@ -11,6 +11,8 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 
+
+
 @Singleton
 @Slf4j
 public class UserController {
@@ -27,8 +29,8 @@ public class UserController {
 
         log.info("UserController > construct > adding default users");
 
-        final User defaultUser1 = new User("A", "A", "A", "A", 1234567891, "WA", "12345", "A", "A");
-        final User defaultUser2 = new User("B", "B", "B", "B", 1224567891, "SZ", "12342", "B", "B");
+        final User defaultUser1 = new User("A", "A", "A", "A", "A", 1234567891, "WA", "12345", "A", "A");
+        final User defaultUser2 = new User("B", "B", "B", "B", "B", 1224567891, "SZ", "12342", "B", "B");
 
         try {
             addUser(defaultUser1);
