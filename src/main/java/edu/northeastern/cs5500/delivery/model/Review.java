@@ -1,19 +1,16 @@
 package edu.northeastern.cs5500.delivery.model;
 
-import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.bson.types.ObjectId;
-
+import java.time.LocalDate;
 import lombok.Data;
-
+import org.bson.types.ObjectId;
 
 /**
  * This is a class representing a review object. Users should be able to retrieve any fields in this
  * class or create a new review object.
  */
 @Data
-public class Review implements Model{
+public class Review implements Model {
     private ObjectId id;
     private String userName;
     private ObjectId restaurantId;
@@ -40,10 +37,6 @@ public class Review implements Model{
     /** @return true if this Review is valid */
     @JsonIgnore
     public boolean isValid() {
-        return !userName.isEmpty()
-                && !comment.isEmpty()
-                && rating >= 0.0
-                && restaurantId != null;
+        return !userName.isEmpty() && !comment.isEmpty() && rating >= 0.0 && restaurantId != null;
     }
-
 }
