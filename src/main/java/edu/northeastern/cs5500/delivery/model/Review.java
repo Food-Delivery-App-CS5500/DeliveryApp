@@ -18,25 +18,9 @@ public class Review implements Model {
     private String comment;
     private Double rating;
 
-    /** Constructor for a Review object */
-    public Review(
-            ObjectId id,
-            String userName,
-            ObjectId restaurantId, // Should this be ObjectID?
-            LocalDate createdTime,
-            String comment,
-            Double rating) {
-        this.id = id;
-        this.userName = userName;
-        this.restaurantId = restaurantId;
-        this.createdTime = createdTime;
-        this.comment = comment;
-        this.rating = rating;
-    }
-
     /** @return true if this Review is valid */
     @JsonIgnore
     public boolean isValid() {
-        return !userName.isEmpty() && !comment.isEmpty() && rating >= 0.0 && restaurantId != null;
+        return !userName.isEmpty() && !comment.isEmpty() && rating >= 0.0 && rating <= 5.0 && restaurantId != null;
     }
 }
