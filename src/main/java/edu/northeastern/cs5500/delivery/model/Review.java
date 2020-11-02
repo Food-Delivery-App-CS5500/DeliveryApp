@@ -21,6 +21,10 @@ public class Review implements Model {
     /** @return true if this Review is valid */
     @JsonIgnore
     public boolean isValid() {
-        return !userName.isEmpty() && !comment.isEmpty() && rating >= 0.0 && rating <= 5.0 && restaurantId != null;
+        return !userName.isEmpty()
+                && !comment.isEmpty()
+                && rating >= 0.0
+                && rating <= 5.0
+                && restaurantId != null;
     }
 }

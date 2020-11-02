@@ -85,8 +85,7 @@ public class ReviewController {
      *
      * @param review - a review object
      * @return Review - an added Review object
-     * @throws Exception - throws exception when Review info not valid or duplicate key in
-     *     database.
+     * @throws Exception - throws exception when Review info not valid or duplicate key in database.
      */
     @Nonnull
     public Review addReview(@Nonnull Review review) throws Exception {
@@ -122,4 +121,3 @@ public class ReviewController {
         reviews.delete(id);
     }
 }
-
