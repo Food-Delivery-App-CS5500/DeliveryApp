@@ -16,6 +16,7 @@ public class User extends Person {
 
     public User(
             String username,
+            String password, 
             String firstName,
             String lastName,
             String email,
@@ -24,7 +25,7 @@ public class User extends Person {
             String city,
             String state,
             String zip) {
-        super(username, firstName, lastName, email, phoneNumber);
+        super(username, password, firstName, lastName, email, phoneNumber);
         this.address = address;
         this.city = city;
         this.state = state;
