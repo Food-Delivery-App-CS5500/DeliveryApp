@@ -1,10 +1,10 @@
 package edu.northeastern.cs5500.delivery.model;
 
-import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.bson.types.ObjectId;
-import lombok.EqualsAndHashCode;
+import java.time.LocalDate;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.bson.types.ObjectId;
 
 /**
  * This is a class representing a delivery driver object. A driver should be able to view the order
@@ -12,7 +12,6 @@ import lombok.Data;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-
 public class DeliveryDriver extends Person {
     private ObjectId Id;
     private ObjectId RestaurantId;
@@ -30,9 +29,9 @@ public class DeliveryDriver extends Person {
             ObjectId Id,
             // ObjectId RestaurantId,
             ObjectId OrderId)
-            // LocalDate PickUpTime,
-            // LocalDate DeliveredTime
-             {
+                // LocalDate PickUpTime,
+                // LocalDate DeliveredTime
+            {
         super(username, firstName, lastName, email, phoneNumber);
         this.Id = Id;
         // this.RestaurantId = RestaurantId;

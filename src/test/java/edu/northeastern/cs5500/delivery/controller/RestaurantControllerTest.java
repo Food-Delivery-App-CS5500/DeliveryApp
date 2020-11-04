@@ -5,20 +5,24 @@ package edu.northeastern.cs5500.delivery.controller;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
-
-import java.util.HashMap;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.repository.InMemoryRepository;
-
+import java.util.HashMap;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class RestaurantControllerTest {
+public class RestaurantControllerTest {
+    Restaurant testRestaurant1 = new Restaurant();
+    Restaurant testRestaurant2 = new Restaurant();
+    Restaurant testRestaurant3 = new Restaurant();
 
     @BeforeEach
-    public void initiateVariables() {
-        Restaurant testRestaurant1 = new Restaurant();
+    public void init() {
         testRestaurant1.setRestaurantName("Best Calzones!");
         testRestaurant1.setRestaurantDescription("Best taste from Italy!");
         HashMap<String, Double> testRestaurant1Menu = new HashMap<>();
@@ -27,7 +31,6 @@ class RestaurantControllerTest {
         testRestaurant1.setRestaurantMenu(testRestaurant1Menu);
         testRestaurant1.setIsActive(true);
 
-        Restaurant testRestaurant2 = new Restaurant();
         testRestaurant2.setRestaurantName("Taj Mahal Indian");
         testRestaurant2.setRestaurantDescription("Best Indian food!");
         HashMap<String, Double> testRestaurant2Menu = new HashMap<>();
@@ -35,38 +38,66 @@ class RestaurantControllerTest {
         testRestaurant2Menu.put("Chicken meal", 12.99);
         testRestaurant2.setRestaurantMenu(testRestaurant2Menu);
         testRestaurant2.setIsActive(true);
+
+        testRestaurant3.setRestaurantName("Ethiopean Best");
+        testRestaurant3.setRestaurantDescription("Best Doro wat!");
+        HashMap<String, Double> testRestaurant3Menu = new HashMap<>();
+        testRestaurant3Menu.put("Vegetarian meal", 13.99);
+        testRestaurant3Menu.put("Fish meal", 14.99);
+        testRestaurant3.setRestaurantMenu(testRestaurant3Menu);
+        testRestaurant3.setIsActive(true);
     }
 
     @Test
     void testRegisterCreatesRestaurants() {
-        RestaurantController restaurantController = new RestaurantController(new InMemoryRepository<Restaurant>());
+        RestaurantController restaurantController =
+                new RestaurantController(new InMemoryRepository<Restaurant>());
         assertThat(restaurantController.getRestaurants()).isNotEmpty();
     }
 
     @Test
     void testRegisterCreatesValidRestaurants() {
-        RestaurantController restaurantController = new RestaurantController(new InMemoryRepository<Restaurant>());
+        RestaurantController restaurantController =
+                new RestaurantController(new InMemoryRepository<Restaurant>());
 
         for (Restaurant restaurant : restaurantController.getRestaurants()) {
-            assertWithMessage(restaurant.getTitle()).that(restaurant.isValid()).isTrue();
+            assertWithMessage(restaurant.getRestaurantName()).that(restaurant.isValid()).isTrue();
         }
     }
 
     @Test
-    void testCanAddDelivery() {
-        // This test should NOT call register
-        // TODO: implement this test.
+    void testCanAddRestaurant() throws ExceptionClass {
+        RestaurantController restaurantController =
+                new RestaurantController(new InMemoryRepository<Restaurant>());
+        Restaurant addedRestaurant1 = restaurantController.addRestaurant(testRestaurant1);
+        ObjectId addedRestaurant1ID = addedRestaurant1.getId();
+        Restaurant addedRestaurantInCollection =
+                restaurantController.getRestaurant(addedRestaurant1ID);
+        assertEquals(testRestaurant1, addedRestaurantInCollection);
+        assertEquals(
+                testRestaurant1.getRestaurantName(),
+                addedRestaurantInCollection.getRestaurantName());
     }
 
     @Test
-    void testCanReplaceDelivery() {
-        // This test should NOT call register
-        // TODO: implement this test.
+    void testCanUpdateRestaurant() throws ExceptionClass {
+        RestaurantController restaurantController =
+                new RestaurantController(new InMemoryRepository<Restaurant>());
+        Restaurant addedRestaurant2 = restaurantController.addRestaurant(testRestaurant2);
+        ObjectId addedRestaurant2ID = addedRestaurant2.getId();
+
+        addedRestaurant2.setRestaurantName("Taste of India");
+        restaurantController.updateRestaurant(addedRestaurant2);
+        assertEquals(addedRestaurant2, restaurantController.getRestaurant(addedRestaurant2ID));
+        System.out.println(restaurantController.getRestaurants());
     }
 
     @Test
-    void testCanDeleteDelivery() {
-        // This test should NOT call register
-        // TODO: implement this test
+    void testCanDeleteRestaurant() throws ExceptionClass {
+        RestaurantController restaurantController = new RestaurantController(new InMemoryRepository<Restaurant>());
+        Restaurant addedRestaurant3 = restaurantController.addRestaurant(testRestaurant3);
+        ObjectId addedRestaurant3ID = addedRestaurant3.getId();
+        restaurantController.deleteRestaurant(addedRestaurant3ID);
+        assertNotEquals(addedRestaurant3ID, restaurantController.getRestaurant(addedRestaurant3ID));
     }
 }

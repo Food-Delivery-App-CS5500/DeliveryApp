@@ -1,14 +1,11 @@
 package edu.northeastern.cs5500.delivery.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.HashMap;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
 @Data
-
 public class Restaurant implements Model {
     private ObjectId id;
     private String restaurantName;
