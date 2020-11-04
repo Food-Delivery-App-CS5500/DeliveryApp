@@ -12,7 +12,7 @@ import org.bson.types.ObjectId;
 @Data
 public class CreditCard implements Model {
     private ObjectId id;
-    private Integer cardNumber;
+    private Long cardNumber;
     private String userName;
     private LocalDate expirationDate;
 
