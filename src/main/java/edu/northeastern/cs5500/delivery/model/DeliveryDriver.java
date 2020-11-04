@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.bson.types.ObjectId;
@@ -25,6 +26,9 @@ public class DeliveryDriver extends Person {
             Integer phoneNumber,
             ObjectId Id,
             ObjectId OrderId)
+                // LocalDate PickUpTime,
+                // LocalDate DeliveredTime
+
             {
         super(username, password, firstName, lastName, email, phoneNumber);
         this.Id = Id;
