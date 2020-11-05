@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDate;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.bson.types.ObjectId;
@@ -14,30 +14,21 @@ import org.bson.types.ObjectId;
 @Data
 public class DeliveryDriver extends Person {
     private ObjectId Id;
-    private ObjectId RestaurantId;
     private ObjectId OrderId;
-    private LocalDate PickUpTime;
-    private LocalDate DeliveredTime;
 
     /** Constructor for DeliveryDriver */
     public DeliveryDriver(
             String username,
+            String password,
             String firstName,
             String lastName,
             String email,
             Integer phoneNumber,
             ObjectId Id,
-            // ObjectId RestaurantId,
-            ObjectId OrderId)
-                // LocalDate PickUpTime,
-                // LocalDate DeliveredTime
-            {
-        super(username, firstName, lastName, email, phoneNumber);
+            ObjectId OrderId) {
+        super(username, password, firstName, lastName, email, phoneNumber);
         this.Id = Id;
-        // this.RestaurantId = RestaurantId;
         this.OrderId = OrderId;
-        // this.PickUpTime = PickUpTime;
-        // this.DeliveredTime = DeliveredTime;
     }
 
     /** @return true if this User is valid */
