@@ -127,6 +127,10 @@ public class CreditCardController {
         log.debug("DeliveryController > deleteDelivery(...)");
         creditCards.delete(id);
     }
+    /** Count the number of creditcard objects in the collection. */
+    public Long count() {
+        return creditCards.count();
+    }
     /**
      * Check if the expiration date on credit card in valid.
      *
