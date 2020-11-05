@@ -19,4 +19,14 @@ public class ModelModule {
     public Class<CreditCard> providesCreditCardClass() {
         return CreditCard.class;
     }
+
+    @Provides
+    public Class<User> providesUserClass() {
+        return User.class;
+    }
+
+    @Provides
+    public Class<DeliveryDriver> providesDeliveryDriverClass() {
+        return DeliveryDriver.class;
+    }
 }

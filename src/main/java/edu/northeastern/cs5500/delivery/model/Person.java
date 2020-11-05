@@ -1,8 +1,10 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 abstract class Person implements Model {
     protected String username;
     protected String password;

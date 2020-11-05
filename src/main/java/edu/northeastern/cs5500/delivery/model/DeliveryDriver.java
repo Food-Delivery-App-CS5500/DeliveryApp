@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import org.bson.types.ObjectId;
 
 /**
@@ -12,6 +14,7 @@ import org.bson.types.ObjectId;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 public class DeliveryDriver extends Person {
     private ObjectId Id;
     private ObjectId OrderId;
@@ -24,10 +27,8 @@ public class DeliveryDriver extends Person {
             String lastName,
             String email,
             Integer phoneNumber,
-            ObjectId Id,
             ObjectId OrderId) {
         super(username, password, firstName, lastName, email, phoneNumber);
-        this.Id = Id;
         this.OrderId = OrderId;
     }
 
