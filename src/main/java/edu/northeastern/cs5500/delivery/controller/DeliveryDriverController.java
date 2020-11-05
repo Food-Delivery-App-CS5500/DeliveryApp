@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.delivery.controller;
 
-import edu.northeastern.cs5500.delivery.model.Order;
 import edu.northeastern.cs5500.delivery.model.DeliveryDriver;
+import edu.northeastern.cs5500.delivery.model.Order;
 import edu.northeastern.cs5500.delivery.repository.GenericRepository;
 import java.util.Collection;
 import javax.annotation.Nonnull;
@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
 @Slf4j
 public class DeliveryDriverController {
     private final GenericRepository<DeliveryDriver> deliveryDrivers;
-    
+
     @Inject
     DeliveryDriverController(GenericRepository<DeliveryDriver> deliveryDriverRepository) {
         deliveryDrivers = deliveryDriverRepository;
@@ -28,8 +28,7 @@ public class DeliveryDriverController {
         log.info("DeliveryDriverController > construct > adding default users");
 
         final Order order1 = new Order();
-		final DeliveryDriver defaultDeliveryDriver1 =
-                new DeliveryDriver();
+        final DeliveryDriver defaultDeliveryDriver1 = new DeliveryDriver();
         defaultDeliveryDriver1.setFirstName("Shaun");
         defaultDeliveryDriver1.setLastName("Ho");
         defaultDeliveryDriver1.setEmail("Shaun@hotmail.com");
@@ -39,8 +38,7 @@ public class DeliveryDriverController {
         defaultDeliveryDriver1.setUsername("shaunho");
 
         final Order order2 = new Order();
-        final DeliveryDriver defaultDeliveryDriver2 =
-                new DeliveryDriver();
+        final DeliveryDriver defaultDeliveryDriver2 = new DeliveryDriver();
         defaultDeliveryDriver2.setFirstName("Emily");
         defaultDeliveryDriver2.setLastName("Chiang");
         defaultDeliveryDriver2.setEmail("Emily@hotmail.com");
@@ -48,7 +46,7 @@ public class DeliveryDriverController {
         defaultDeliveryDriver2.setPassword("aaa");
         defaultDeliveryDriver2.setPhoneNumber(1234567891);
         defaultDeliveryDriver2.setUsername("emilychiang");
-        
+
         try {
             addDeliveryDriver(defaultDeliveryDriver1);
             addDeliveryDriver(defaultDeliveryDriver2);
@@ -71,7 +69,8 @@ public class DeliveryDriverController {
     }
 
     @Nonnull
-    public DeliveryDriver addDeliveryDriver(@Nonnull DeliveryDriver deliveryDriver) throws Exception {
+    public DeliveryDriver addDeliveryDriver(@Nonnull DeliveryDriver deliveryDriver)
+            throws Exception {
         log.debug("DeliveryDriverController > addUser(...)");
         if (!deliveryDriver.isValid()) {
             throw new ExceptionClass("InvalidUserException");
@@ -89,7 +88,8 @@ public class DeliveryDriverController {
         return deliveryDrivers.add(deliveryDriver);
     }
 
-    private boolean checkDuplicateUsername(Collection<DeliveryDriver> deliveryDrivers, DeliveryDriver driverToCheck) {
+    private boolean checkDuplicateUsername(
+            Collection<DeliveryDriver> deliveryDrivers, DeliveryDriver driverToCheck) {
         for (DeliveryDriver driver : deliveryDrivers) {
             if (driverToCheck.getUsername() == driver.getUsername()) {
                 return false;

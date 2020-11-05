@@ -26,8 +26,7 @@ public class UserController {
 
         log.info("UserController > construct > adding default users");
 
-        final User defaultUser1 =
-                new User();
+        final User defaultUser1 = new User();
 
         defaultUser1.setFirstName("Shaun");
         defaultUser1.setLastName("Ho");
@@ -40,8 +39,7 @@ public class UserController {
         defaultUser1.setZip("12345");
         defaultUser1.setPassword("AABABABA");
 
-        final User defaultUser2 =
-                new User();
+        final User defaultUser2 = new User();
 
         defaultUser1.setFirstName("Emily");
         defaultUser1.setLastName("Chiang");
@@ -53,7 +51,7 @@ public class UserController {
         defaultUser1.setState("WA");
         defaultUser1.setZip("12345");
         defaultUser1.setPassword("ABABA");
-        
+
         try {
             addUser(defaultUser1);
             addUser(defaultUser2);
