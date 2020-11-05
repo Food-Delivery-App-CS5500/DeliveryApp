@@ -5,6 +5,7 @@ import edu.northeastern.cs5500.delivery.repository.GenericRepository;
 import java.time.LocalDate;
 import java.util.Collection;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -62,12 +63,9 @@ public class ReviewController {
      * @return Review - return a review object
      * @throws Exception - throws exception when object id does not exist in database
      */
-    @Nonnull
+    @Nullable
     public Review getReview(@Nonnull ObjectId id) throws Exception {
         log.debug("ReviewController > getReview({})", id);
-        if (reviews.get(id) == null) {
-            throw new Exception("No such review exist.");
-        }
         return reviews.get(id);
     }
     /**
@@ -100,14 +98,13 @@ public class ReviewController {
 
         return reviews.add(review);
     }
-
     /**
      * Update information in a existing review object.
      *
      * @param review - a review object to update
      * @throws Exception - throws exception when review info not valid.
      */
-    public void updateCreditCard(@Nonnull Review review) throws Exception {
+    public void updateReview(@Nonnull Review review) throws Exception {
         log.debug("ReviewController > updateReview(...)");
         reviews.update(review);
     }
