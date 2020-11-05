@@ -13,7 +13,12 @@ abstract class Person implements Model {
 
     /** Constructor for Person */
     public Person(
-            String username, String password, String firstName, String lastName, String email, Integer phoneNumber) {
+            String username,
+            String password,
+            String firstName,
+            String lastName,
+            String email,
+            Integer phoneNumber) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

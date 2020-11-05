@@ -16,7 +16,7 @@ public class User extends Person {
 
     public User(
             String username,
-            String password, 
+            String password,
             String firstName,
             String lastName,
             String email,

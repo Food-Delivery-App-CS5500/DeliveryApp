@@ -68,7 +68,7 @@ public class RestaurantController {
     }
 
     @Nonnull
-    public Restaurant addRestaurant(@Nonnull Restaurant restaurant) throws Exception {
+    public Restaurant addRestaurant(@Nonnull Restaurant restaurant) throws ExceptionClass {
         log.debug("RestaurantController > addRestaurant(...)");
         if (!restaurant.isValid()) {
             // TODO: replace with a real invalid object exception
@@ -86,12 +86,12 @@ public class RestaurantController {
         return restaurants.add(restaurant);
     }
 
-    public void updateRestaurant(@Nonnull Restaurant restaurant) throws Exception {
+    public void updateRestaurant(@Nonnull Restaurant restaurant) throws ExceptionClass {
         log.debug("RestaurantController > updateRestaurant(...)");
         restaurants.update(restaurant);
     }
 
-    public void deleteRestaurant(@Nonnull ObjectId id) throws Exception {
+    public void deleteRestaurant(@Nonnull ObjectId id) throws ExceptionClass {
         log.debug("RestaurantController > deleteRestaurant(...)");
         restaurants.delete(id);
     }
