@@ -26,10 +26,31 @@ public class UserController {
 
         log.info("UserController > construct > adding default users");
 
-        final User defaultUser1 =
-                new User("A", "A", "A", "A", "A", 1234567891, "WA", "12345", "A", "A");
-        final User defaultUser2 =
-                new User("B", "B", "B", "B", "B", 1224567891, "SZ", "12342", "B", "B");
+        final User defaultUser1 = new User();
+
+        defaultUser1.setFirstName("Shaun");
+        defaultUser1.setLastName("Ho");
+        defaultUser1.setEmail("shaun@hotmail.com");
+        defaultUser1.setAddress("A street");
+        defaultUser1.setCity("Seattle");
+        defaultUser1.setUsername("shaunho");
+        defaultUser1.setPhoneNumber(1234567891);
+        defaultUser1.setState("WA");
+        defaultUser1.setZip("12345");
+        defaultUser1.setPassword("AABABABA");
+
+        final User defaultUser2 = new User();
+
+        defaultUser1.setFirstName("Emily");
+        defaultUser1.setLastName("Chiang");
+        defaultUser1.setEmail("emily@hotmail.com");
+        defaultUser1.setAddress("B street");
+        defaultUser1.setCity("Seattle");
+        defaultUser1.setUsername("emilychiang");
+        defaultUser1.setPhoneNumber(1234567891);
+        defaultUser1.setState("WA");
+        defaultUser1.setZip("12345");
+        defaultUser1.setPassword("ABABA");
 
         try {
             addUser(defaultUser1);

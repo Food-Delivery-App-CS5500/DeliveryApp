@@ -6,7 +6,6 @@ package edu.northeastern.cs5500.delivery.controller;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import edu.northeastern.cs5500.delivery.model.Restaurant;
@@ -94,7 +93,8 @@ public class RestaurantControllerTest {
 
     @Test
     void testCanDeleteRestaurant() throws ExceptionClass {
-        RestaurantController restaurantController = new RestaurantController(new InMemoryRepository<Restaurant>());
+        RestaurantController restaurantController =
+                new RestaurantController(new InMemoryRepository<Restaurant>());
         Restaurant addedRestaurant3 = restaurantController.addRestaurant(testRestaurant3);
         ObjectId addedRestaurant3ID = addedRestaurant3.getId();
         restaurantController.deleteRestaurant(addedRestaurant3ID);
