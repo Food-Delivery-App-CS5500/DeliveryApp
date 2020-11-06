@@ -117,4 +117,8 @@ public class ReviewController {
         log.debug("ReviewController > deleteReview(...)");
         reviews.delete(id);
     }
+    /** Count the number of review objects in the collection. */
+    public Long count() {
+        return reviews.count();
+    }
 }

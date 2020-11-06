@@ -19,7 +19,7 @@ public class CreditCardControllerTest {
     }
 
     @Test
-    void testRegisterCreatesValidDeliverys() {
+    void testRegisterCreatesValidCreditCards() {
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
         for (CreditCard card : cardController.getCreditCards()) {
