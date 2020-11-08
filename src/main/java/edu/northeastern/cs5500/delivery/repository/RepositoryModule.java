@@ -28,6 +28,11 @@ public class RepositoryModule {
     public GenericRepository<Review> provideReviewRepository() {
         return new InMemoryRepository<>();
     }
+
+    @Provides
+    public GenericRepository<Review> provideUserRepository() {
+        return new InMemoryRepository<>();
+    }
 }
 
 /*

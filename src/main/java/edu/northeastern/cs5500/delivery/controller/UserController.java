@@ -34,7 +34,7 @@ public class UserController {
         defaultUser1.setAddress("A street");
         defaultUser1.setCity("Seattle");
         defaultUser1.setUsername("shaunho");
-        defaultUser1.setPhoneNumber(1234567891);
+        defaultUser1.setPhoneNumber(1234567891L);
         defaultUser1.setState("WA");
         defaultUser1.setZip("12345");
         defaultUser1.setPassword("AABABABA");
@@ -47,7 +47,7 @@ public class UserController {
         defaultUser1.setAddress("B street");
         defaultUser1.setCity("Seattle");
         defaultUser1.setUsername("emilychiang");
-        defaultUser1.setPhoneNumber(1234567891);
+        defaultUser1.setPhoneNumber(1234567891L);
         defaultUser1.setState("WA");
         defaultUser1.setZip("12345");
         defaultUser1.setPassword("ABABA");
@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @Nonnull
-    public User addUser(@Nonnull User user) throws Exception {
+    public User addUser(@Nonnull User user) throws ExceptionClass {
         log.debug("UserController > addUser(...)");
         if (!user.isValid()) {
             throw new ExceptionClass("InvalidUserException");
@@ -85,8 +85,16 @@ public class UserController {
             throw new ExceptionClass("DuplicateKeyExecption");
         }
 
+        if (!checkPhoneLength(user)) {
+            throw new ExceptionClass("PhoneNumberException");
+        }
+
         if (!checkDuplicateUsername(allUsers, user)) {
             throw new ExceptionClass("DuplicateUsernameException");
+        }
+
+        if (!checkZipCodeLength(user)) {
+            throw new ExceptionClass("InvalidZipcodeException");
         }
 
         return users.add(user);
@@ -101,12 +109,39 @@ public class UserController {
         return true;
     }
 
-    public void updateUser(@Nonnull User user) throws Exception {
+    private boolean checkPhoneLength(User user) {
+        if (Long.toString(user.getPhoneNumber()).length() != 10) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkZipCodeLength(User user) {
+        if (user.getZip().length() != 5) {
+            return false;
+        }
+        return true;
+    }
+
+    public void updateUser(@Nonnull User user) throws ExceptionClass {
         log.debug("UserController > updateUser(...)");
+
+        if (!checkPhoneLength(user)) {
+            throw new ExceptionClass("PhoneNumberException");
+        }
+
+        if (!checkZipCodeLength(user)) {
+            throw new ExceptionClass("InvalidZipcodeException");
+        }
+
+        // if (!checkDuplicateUsername(users.getAll(), user)) {
+        //     throw new ExceptionClass("DuplicateUsernameException");
+        // }
+
         users.update(user);
     }
 
-    public void deleteUser(@Nonnull ObjectId id) throws Exception {
+    public void deleteUser(@Nonnull ObjectId id) throws ExceptionClass {
         log.debug("UserController > deleteUser(...)");
         users.delete(id);
     }
