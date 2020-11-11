@@ -134,12 +134,10 @@ public class UserController {
             throw new ExceptionClass("InvalidZipcodeException");
         }
 
-        // if (!checkDuplicateUsername(users.getAll(), user)) {
-        //     throw new ExceptionClass("DuplicateUsernameException");
-        // }
-
         users.update(user);
     }
+
+
 
     public void deleteUser(@Nonnull ObjectId id) throws ExceptionClass {
         log.debug("UserController > deleteUser(...)");
