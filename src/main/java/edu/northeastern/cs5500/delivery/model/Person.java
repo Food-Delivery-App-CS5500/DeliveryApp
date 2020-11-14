@@ -11,7 +11,7 @@ abstract class Person implements Model {
     protected String firstName;
     protected String lastName;
     protected String email;
-    protected Integer phoneNumber;
+    protected Long phoneNumber;
 
     /** Constructor for Person */
     public Person(
@@ -20,7 +20,7 @@ abstract class Person implements Model {
             String firstName,
             String lastName,
             String email,
-            Integer phoneNumber) {
+            Long phoneNumber) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

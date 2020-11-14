@@ -24,7 +24,7 @@ public class DeliveryDriver extends Person {
             String firstName,
             String lastName,
             String email,
-            Integer phoneNumber,
+            Long phoneNumber,
             ObjectId OrderId) {
         super(username, password, firstName, lastName, email, phoneNumber);
         this.OrderId = OrderId;
@@ -36,7 +36,7 @@ public class DeliveryDriver extends Person {
         return !username.isEmpty()
                 && !firstName.isEmpty()
                 && !lastName.isEmpty()
-                && Integer.toString(phoneNumber).length() == 10
+                && phoneNumber != null
                 && !email.isEmpty();
     }
 }

@@ -6,6 +6,7 @@ import edu.northeastern.cs5500.delivery.model.CreditCard;
 import edu.northeastern.cs5500.delivery.model.Delivery;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.model.Review;
+import edu.northeastern.cs5500.delivery.model.User;
 
 @Module
 public class RepositoryModule {
@@ -26,6 +27,11 @@ public class RepositoryModule {
 
     @Provides
     public GenericRepository<Review> provideReviewRepository() {
+        return new InMemoryRepository<>();
+    }
+
+    @Provides
+    public GenericRepository<User> provideUserRepository() {
         return new InMemoryRepository<>();
     }
 }
