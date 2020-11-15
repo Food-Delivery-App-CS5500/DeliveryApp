@@ -17,10 +17,12 @@ import org.bson.types.ObjectId;
 @Slf4j
 public class RestaurantController {
     private final GenericRepository<Restaurant> restaurants;
+    private final FoodItemController foodItemController;
 
     @Inject
-    RestaurantController(GenericRepository<Restaurant> restaurantRepository) {
+    RestaurantController(GenericRepository<Restaurant> restaurantRepository, FoodItemController foodItemsInstance) {
         restaurants = restaurantRepository;
+        foodItemController = foodItemsInstance;
 
         log.info("RestaurantController > construct");
 
@@ -41,8 +43,7 @@ public class RestaurantController {
         defaultFood2.setFoodItem("Cheese Pizza");
         defaultFood2.setFoodPrice(899);
         ArrayList<ObjectId> defaultRestaurant1Menu = new ArrayList<>();
-        defaultRestaurant1Menu.add(defaultFood1.getId());
-        defaultRestaurant1Menu.add(defaultFood2.getId());
+        
         defaultRestaurant1.setRestaurantMenu(defaultRestaurant1Menu);
         defaultRestaurant1.setIsActive(true);
 
@@ -56,12 +57,19 @@ public class RestaurantController {
         defaultFood4.setFoodItem("Banana, Mango Kale Fusion Smoothie");
         defaultFood4.setFoodPrice(899);
         ArrayList<ObjectId> defaultRestaurant2Menu = new ArrayList<>();
-        defaultRestaurant2Menu.add(defaultFood3.getId());
-        defaultRestaurant2Menu.add(defaultFood4.getId());
+
         defaultRestaurant2.setRestaurantMenu(defaultRestaurant2Menu);
         defaultRestaurant2.setIsActive(true);
 
         try {
+            ObjectId foodItem1Id = foodItemController.addFoodItem(defaultFood1).getId();
+            ObjectId foodItem2Id = foodItemController.addFoodItem(defaultFood2).getId();
+            ObjectId foodItem3Id = foodItemController.addFoodItem(defaultFood3).getId();
+            ObjectId foodItem4Id = foodItemController.addFoodItem(defaultFood4).getId();
+            defaultRestaurant1Menu.add(foodItem1Id);
+            defaultRestaurant1Menu.add(foodItem2Id);
+            defaultRestaurant2Menu.add(foodItem3Id);
+            defaultRestaurant2Menu.add(foodItem4Id);
             addRestaurant(defaultRestaurant1);
             addRestaurant(defaultRestaurant2);
         } catch (Exception e) {
