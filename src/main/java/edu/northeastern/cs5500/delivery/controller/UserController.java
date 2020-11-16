@@ -137,8 +137,6 @@ public class UserController {
         users.update(user);
     }
 
-
-
     public void deleteUser(@Nonnull ObjectId id) throws ExceptionClass {
         log.debug("UserController > deleteUser(...)");
         users.delete(id);

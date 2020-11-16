@@ -5,7 +5,6 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-
 import edu.northeastern.cs5500.delivery.model.User;
 import edu.northeastern.cs5500.delivery.repository.InMemoryRepository;
 import org.bson.types.ObjectId;
@@ -86,11 +85,13 @@ public class UserControllerTest {
         System.out.println(userController.getUsers());
         User addedUser2 = userController.addUser(user2);
         ObjectId addedUser2ID = addedUser2.getId();
-        System.out.println("Original Address: " + userController.getUser(addedUser2ID).getAddress());
+        System.out.println(
+                "Original Address: " + userController.getUser(addedUser2ID).getAddress());
         System.out.println("Added in User2: " + userController.getUsers());
         addedUser2.setAddress("Bellevue Road");
         userController.updateUser(addedUser2);
-        System.out.println("Changed user2 Address: " + userController.getUser(addedUser2ID).getAddress());
+        System.out.println(
+                "Changed user2 Address: " + userController.getUser(addedUser2ID).getAddress());
         assertEquals(addedUser2, userController.getUser(addedUser2ID));
         System.out.println(userController.getUsers());
     }
@@ -119,8 +120,7 @@ public class UserControllerTest {
         user.setPhoneNumber(1234567891021L);
         user.setUsername("jenChang");
 
-        UserController userController =
-                new UserController(new InMemoryRepository<User>());
+        UserController userController = new UserController(new InMemoryRepository<User>());
         Assertions.assertThrows(
                 Exception.class,
                 () -> {
@@ -130,18 +130,6 @@ public class UserControllerTest {
 
     @Test
     void testAddDuplicateUsername() {
-        User user = new User();
-        user.setFirstName("Jen");
-        user.setLastName("Chang");
-        user.setAddress("Seattle St");
-        user.setPassword("abcde");
-        user.setState("WA");
-        user.setCity("Seattle");
-        user.setZip("00000");
-        user.setEmail("abc@gmail.com");
-        user.setPhoneNumber(1234567891021L);
-        user.setUsername("jenChang");
-
         User dupUser = new User();
         dupUser.setFirstName("Jennie");
         dupUser.setLastName("Zhang");
@@ -154,13 +142,12 @@ public class UserControllerTest {
         dupUser.setPhoneNumber(1234567891021L);
         dupUser.setUsername("jenChang");
 
-        UserController userController =
-                new UserController(new InMemoryRepository<User>());
+        UserController userController = new UserController(new InMemoryRepository<User>());
 
         Assertions.assertThrows(
                 Exception.class,
                 () -> {
-                    userController.addUser(user);
+                    userController.addUser(dupUser);
                 });
     }
 
@@ -178,8 +165,7 @@ public class UserControllerTest {
         user.setPhoneNumber(1234567891021L);
         user.setUsername("jenChang");
 
-        UserController userController =
-                new UserController(new InMemoryRepository<User>());
+        UserController userController = new UserController(new InMemoryRepository<User>());
         Assertions.assertThrows(
                 Exception.class,
                 () -> {
@@ -197,8 +183,7 @@ public class UserControllerTest {
         user.setPhoneNumber(1234567891021L);
         user.setUsername("jenChang");
 
-        UserController userController =
-                new UserController(new InMemoryRepository<User>());
+        UserController userController = new UserController(new InMemoryRepository<User>());
         Assertions.assertThrows(
                 Exception.class,
                 () -> {
