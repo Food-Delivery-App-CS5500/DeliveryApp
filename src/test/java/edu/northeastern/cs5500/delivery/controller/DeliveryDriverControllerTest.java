@@ -82,26 +82,14 @@ public class DeliveryDriverControllerTest {
     void testCanUpdateDeliveryDriver() throws ExceptionClass {
         DeliveryDriverController deliveryDriverController =
                 new DeliveryDriverController(new InMemoryRepository<DeliveryDriver>());
-        System.out.println(deliveryDriverController.getDeliveryDrivers());
         DeliveryDriver addedDeliveryDriver2 =
                 deliveryDriverController.addDeliveryDriver(DeliveryDriver2);
         ObjectId addedDeliveryDriver2ID = addedDeliveryDriver2.getId();
-        System.out.println(
-                "Original username: "
-                        + deliveryDriverController
-                                .getDeliveryDriver(addedDeliveryDriver2ID)
-                                .getUsername());
         addedDeliveryDriver2.setUsername("HelloHello");
         deliveryDriverController.updateDeliveryDriver(addedDeliveryDriver2);
-        System.out.println(
-                "Changed deliveryDriver2 Username: "
-                        + deliveryDriverController
-                                .getDeliveryDriver(addedDeliveryDriver2ID)
-                                .getUsername());
         assertEquals(
                 addedDeliveryDriver2,
                 deliveryDriverController.getDeliveryDriver(addedDeliveryDriver2ID));
-        System.out.println(deliveryDriverController.getDeliveryDrivers());
     }
 
     @Test
@@ -115,7 +103,6 @@ public class DeliveryDriverControllerTest {
         assertNotEquals(
                 addedDeliveryDriver3,
                 deliveryDriverController.getDeliveryDriver(addedDeliveryDriver3ID));
-        System.out.println(deliveryDriverController.getDeliveryDriver(addedDeliveryDriver3ID));
     }
 
     @Test

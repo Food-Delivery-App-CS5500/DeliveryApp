@@ -82,18 +82,11 @@ public class UserControllerTest {
     @Test
     void testCanUpdateUser() throws ExceptionClass {
         UserController userController = new UserController(new InMemoryRepository<User>());
-        System.out.println(userController.getUsers());
         User addedUser2 = userController.addUser(user2);
         ObjectId addedUser2ID = addedUser2.getId();
-        System.out.println(
-                "Original Address: " + userController.getUser(addedUser2ID).getAddress());
-        System.out.println("Added in User2: " + userController.getUsers());
         addedUser2.setAddress("Bellevue Road");
         userController.updateUser(addedUser2);
-        System.out.println(
-                "Changed user2 Address: " + userController.getUser(addedUser2ID).getAddress());
         assertEquals(addedUser2, userController.getUser(addedUser2ID));
-        System.out.println(userController.getUsers());
     }
 
     @Test
@@ -103,7 +96,6 @@ public class UserControllerTest {
         ObjectId addedUser3Id = addedUser3.getId();
         userController.deleteUser(addedUser3Id);
         assertNotEquals(addedUser3, userController.getUser(addedUser3Id));
-        System.out.println(userController.getUser(addedUser3Id));
     }
 
     @Test
