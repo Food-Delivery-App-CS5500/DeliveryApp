@@ -41,16 +41,16 @@ public class UserController {
 
         final User defaultUser2 = new User();
 
-        defaultUser1.setFirstName("Emily");
-        defaultUser1.setLastName("Chiang");
-        defaultUser1.setEmail("emily@hotmail.com");
-        defaultUser1.setAddress("B street");
-        defaultUser1.setCity("Seattle");
-        defaultUser1.setUsername("emilychiang");
-        defaultUser1.setPhoneNumber(1234567891L);
-        defaultUser1.setState("WA");
-        defaultUser1.setZip("12345");
-        defaultUser1.setPassword("ABABA");
+        defaultUser2.setFirstName("Emily");
+        defaultUser2.setLastName("Chiang");
+        defaultUser2.setEmail("emily@hotmail.com");
+        defaultUser2.setAddress("D street");
+        defaultUser2.setCity("Seattle");
+        defaultUser2.setUsername("emilychiang");
+        defaultUser2.setPhoneNumber(1234567891L);
+        defaultUser2.setState("WA");
+        defaultUser2.setZip("12345");
+        defaultUser2.setPassword("ABABA");
 
         try {
             addUser(defaultUser1);
@@ -102,7 +102,7 @@ public class UserController {
 
     private boolean checkDuplicateUsername(Collection<User> users, User userToCheck) {
         for (User user : users) {
-            if (userToCheck.getUsername() == user.getUsername()) {
+            if (user.getUsername() == userToCheck.getUsername()) {
                 return false;
             }
         }
