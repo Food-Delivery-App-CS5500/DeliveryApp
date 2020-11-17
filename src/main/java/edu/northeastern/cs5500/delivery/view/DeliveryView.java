@@ -50,6 +50,7 @@ public class DeliveryView implements View {
                         halt(404);
                     }
                     response.type("application/json");
+                    System.out.println("Get 1 delivery item");
                     return delivery;
                 },
                 jsonTransformer);
@@ -57,7 +58,9 @@ public class DeliveryView implements View {
         post(
                 "/delivery",
                 (request, response) -> {
+                    System.out.println("We are here");
                     ObjectMapper mapper = new ObjectMapper();
+
                     Delivery delivery = mapper.readValue(request.body(), Delivery.class);
                     if (!delivery.isValid()) {
                         response.status(400);
@@ -68,8 +71,10 @@ public class DeliveryView implements View {
                     delivery.setId(null);
                     delivery = deliveryController.addDelivery(delivery);
 
-                    response.redirect(
-                            String.format("/delivery/{}", delivery.getId().toHexString()), 301);
+                    // response.redirect(
+                    //        String.format("/delivery/{}", delivery.getId().toHexString()), 301);
+                    response.redirect("/delivery/addedAnDelivery");
+                    System.out.println("new method successfully added a delivery!");
                     return delivery;
                 });
 
