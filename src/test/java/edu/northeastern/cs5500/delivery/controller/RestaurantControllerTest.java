@@ -8,6 +8,7 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import edu.northeastern.cs5500.delivery.model.FoodItem;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.repository.InMemoryRepository;
 import java.util.HashMap;
@@ -24,25 +25,49 @@ public class RestaurantControllerTest {
     public void init() {
         testRestaurant1.setRestaurantName("Best Calzones!");
         testRestaurant1.setRestaurantDescription("Best taste from Italy!");
-        HashMap<String, Double> testRestaurant1Menu = new HashMap<>();
-        testRestaurant1Menu.put("Pepperoni Calzone", 11.99);
-        testRestaurant1Menu.put("Cheese Spinach Calzone", 10.99);
+        HashMap<ObjectId, FoodItem> testRestaurant1Menu = new HashMap<>();
+        FoodItem testFood1 = new FoodItem();
+        testFood1.setId(new ObjectId());
+        testFood1.setFoodItem("Pepperoni Calzone");
+        testFood1.setFoodPrice(1199);
+        FoodItem testFood2 = new FoodItem();
+        testFood2.setId(new ObjectId());
+        testFood2.setFoodItem("Cheese Spinach Calzone");
+        testFood2.setFoodPrice(1099);
+        testRestaurant1Menu.put(testFood1.getId(), testFood1);
+        testRestaurant1Menu.put(testFood2.getId(), testFood2);
         testRestaurant1.setRestaurantMenu(testRestaurant1Menu);
         testRestaurant1.setIsActive(true);
 
         testRestaurant2.setRestaurantName("Taj Mahal Indian");
         testRestaurant2.setRestaurantDescription("Best Indian food!");
-        HashMap<String, Double> testRestaurant2Menu = new HashMap<>();
-        testRestaurant2Menu.put("Vegetarian meal", 11.99);
-        testRestaurant2Menu.put("Chicken meal", 12.99);
+        HashMap<ObjectId, FoodItem> testRestaurant2Menu = new HashMap<>();
+        FoodItem testFood3 = new FoodItem();
+        testFood3.setId(new ObjectId());
+        testFood3.setFoodItem("Vegetarian meal");
+        testFood3.setFoodPrice(1199);
+        FoodItem testFood4 = new FoodItem();
+        testFood4.setId(new ObjectId());
+        testFood4.setFoodItem("Chicken meal");
+        testFood4.setFoodPrice(1299);
+        testRestaurant2Menu.put(testFood3.getId(), testFood3);
+        testRestaurant2Menu.put(testFood4.getId(), testFood4);
         testRestaurant2.setRestaurantMenu(testRestaurant2Menu);
         testRestaurant2.setIsActive(true);
 
         testRestaurant3.setRestaurantName("Ethiopean Best");
         testRestaurant3.setRestaurantDescription("Best Doro wat!");
-        HashMap<String, Double> testRestaurant3Menu = new HashMap<>();
-        testRestaurant3Menu.put("Vegetarian meal", 13.99);
-        testRestaurant3Menu.put("Fish meal", 14.99);
+        HashMap<ObjectId, FoodItem> testRestaurant3Menu = new HashMap<>();
+        FoodItem testFood5 = new FoodItem();
+        testFood5.setId(new ObjectId());
+        testFood5.setFoodItem("Beef meal");
+        testFood5.setFoodPrice(1399);
+        FoodItem testFood6 = new FoodItem();
+        testFood6.setId(new ObjectId());
+        testFood6.setFoodItem("Fish meal");
+        testFood6.setFoodPrice(1499);
+        testRestaurant3Menu.put(testFood5.getId(), testFood5);
+        testRestaurant3Menu.put(testFood6.getId(), testFood6);
         testRestaurant3.setRestaurantMenu(testRestaurant3Menu);
         testRestaurant3.setIsActive(true);
     }

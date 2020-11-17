@@ -29,4 +29,14 @@ public class ModelModule {
     public Class<DeliveryDriver> providesDeliveryDriverClass() {
         return DeliveryDriver.class;
     }
+
+    @Provides
+    public Class<FoodItem> provideFoodItemClass() {
+        return FoodItem.class;
+    }
+
+    @Provides
+    public Class<Order> provideOrderClass() {
+        return Order.class;
+    }
 }

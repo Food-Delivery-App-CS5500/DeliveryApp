@@ -1,7 +1,8 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
@@ -11,18 +12,17 @@ public class Order implements Model {
     private ObjectId id;
     private String userName;
     private ObjectId restaurantId;
-    private String foodItem;
-    private Double price;
-    private Integer quantity;
+    private HashMap<ObjectId, Integer> orderFoodItems;
     private String comment;
-    private LocalDate orderTime;
-    private LocalDate scheduleDelivery;
-    private LocalDate deliveredTime;
+    private LocalDateTime orderTime;
+    private LocalDateTime scheduleDelivery;
+    private LocalDateTime deliveredTime;
     private OrderStatus status;
+    private CreditCard paymentCard;
 
     /** @return true if this order is valid */
     @JsonIgnore
     public boolean isValid() {
-        return quantity != null && quantity > 0 && !userName.isEmpty() && !foodItem.isEmpty();
+        return !userName.isEmpty() && !orderFoodItems.isEmpty();
     }
 }
