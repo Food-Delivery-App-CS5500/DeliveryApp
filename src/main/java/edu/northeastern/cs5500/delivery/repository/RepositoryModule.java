@@ -34,6 +34,7 @@ public class RepositoryModule {
     @Provides
     public GenericRepository<Order> provideOrderRepository() {
         return new InMemoryRepository<>();
+    }
     
     @Provides
     public GenericRepository<User> provideUserRepository() {
