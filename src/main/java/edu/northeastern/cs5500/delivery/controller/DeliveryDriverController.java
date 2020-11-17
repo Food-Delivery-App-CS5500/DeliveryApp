@@ -1,7 +1,6 @@
 package edu.northeastern.cs5500.delivery.controller;
 
 import edu.northeastern.cs5500.delivery.model.DeliveryDriver;
-import edu.northeastern.cs5500.delivery.model.Order;
 import edu.northeastern.cs5500.delivery.repository.GenericRepository;
 import java.util.Collection;
 import javax.annotation.Nonnull;
@@ -27,22 +26,22 @@ public class DeliveryDriverController {
 
         log.info("DeliveryDriverController > construct > adding default users");
 
-        final Order order1 = new Order();
+        final ObjectId order1 = new ObjectId();
         final DeliveryDriver defaultDeliveryDriver1 = new DeliveryDriver();
         defaultDeliveryDriver1.setFirstName("Shaun");
         defaultDeliveryDriver1.setLastName("Ho");
         defaultDeliveryDriver1.setEmail("Shaun@hotmail.com");
-        defaultDeliveryDriver1.setOrderId(order1.getId());
+        defaultDeliveryDriver1.setOrderId(order1);
         defaultDeliveryDriver1.setPassword("aaa");
         defaultDeliveryDriver1.setPhoneNumber(1234567890L);
         defaultDeliveryDriver1.setUsername("shaunho");
 
-        final Order order2 = new Order();
+        final ObjectId order2 = new ObjectId();
         final DeliveryDriver defaultDeliveryDriver2 = new DeliveryDriver();
         defaultDeliveryDriver2.setFirstName("Emily");
         defaultDeliveryDriver2.setLastName("Chiang");
         defaultDeliveryDriver2.setEmail("Emily@hotmail.com");
-        defaultDeliveryDriver2.setOrderId(order2.getId());
+        defaultDeliveryDriver2.setOrderId(order2);
         defaultDeliveryDriver2.setPassword("aaa");
         defaultDeliveryDriver2.setPhoneNumber(1234567891L);
         defaultDeliveryDriver2.setUsername("emilychiang");
@@ -111,6 +110,11 @@ public class DeliveryDriverController {
 
     public void updateDeliveryDriver(@Nonnull DeliveryDriver driver) throws ExceptionClass {
         log.debug("DeliveryDriverController > updateDeliveryDriver(...)");
+
+        if (!checkPhoneLength(driver)) {
+            throw new ExceptionClass("PhoneNumberException");
+        }
+
         deliveryDrivers.update(driver);
     }
 

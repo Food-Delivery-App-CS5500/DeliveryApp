@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import edu.northeastern.cs5500.delivery.model.CreditCard;
 import edu.northeastern.cs5500.delivery.model.Delivery;
+import edu.northeastern.cs5500.delivery.model.DeliveryDriver;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.model.Review;
 import edu.northeastern.cs5500.delivery.model.User;
@@ -32,6 +33,11 @@ public class RepositoryModule {
 
     @Provides
     public GenericRepository<User> provideUserRepository() {
+        return new InMemoryRepository<>();
+    }
+
+    @Provides
+    public GenericRepository<DeliveryDriver> provideDeliveryDriverRepository() {
         return new InMemoryRepository<>();
     }
 }
