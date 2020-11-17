@@ -3,9 +3,8 @@ package edu.northeastern.cs5500.delivery.controller;
 import edu.northeastern.cs5500.delivery.model.FoodItem;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.repository.GenericRepository;
-
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -17,12 +16,10 @@ import org.bson.types.ObjectId;
 @Slf4j
 public class RestaurantController {
     private final GenericRepository<Restaurant> restaurants;
-    private final FoodItemController foodItemController;
 
     @Inject
-    RestaurantController(GenericRepository<Restaurant> restaurantRepository, FoodItemController foodItemsInstance) {
+    RestaurantController(GenericRepository<Restaurant> restaurantRepository) {
         restaurants = restaurantRepository;
-        foodItemController = foodItemsInstance;
 
         log.info("RestaurantController > construct");
 
@@ -37,13 +34,15 @@ public class RestaurantController {
         defaultRestaurant1.setRestaurantName("Best Pizza");
         defaultRestaurant1.setRestaurantDescription("Best taste from Italy!");
         FoodItem defaultFood1 = new FoodItem();
+        defaultFood1.setId(new ObjectId());
         defaultFood1.setFoodItem("Pepperoni Pizza");
         defaultFood1.setFoodPrice(1099);
         FoodItem defaultFood2 = new FoodItem();
+        defaultFood2.setId(new ObjectId());
         defaultFood2.setFoodItem("Cheese Pizza");
         defaultFood2.setFoodPrice(899);
-        ArrayList<ObjectId> defaultRestaurant1Menu = new ArrayList<>();
-        
+        HashMap<ObjectId, FoodItem> defaultRestaurant1Menu = new HashMap<>();
+
         defaultRestaurant1.setRestaurantMenu(defaultRestaurant1Menu);
         defaultRestaurant1.setIsActive(true);
 
@@ -51,25 +50,23 @@ public class RestaurantController {
         defaultRestaurant2.setRestaurantName("Salads and Smoothies");
         defaultRestaurant2.setRestaurantDescription("Live and eat healthy!");
         FoodItem defaultFood3 = new FoodItem();
+        defaultFood3.setId(new ObjectId());
         defaultFood3.setFoodItem("Fresh Tossed Salad - 1 protein, large");
         defaultFood3.setFoodPrice(1199);
         FoodItem defaultFood4 = new FoodItem();
+        defaultFood4.setId(new ObjectId());
         defaultFood4.setFoodItem("Banana, Mango Kale Fusion Smoothie");
         defaultFood4.setFoodPrice(899);
-        ArrayList<ObjectId> defaultRestaurant2Menu = new ArrayList<>();
+        HashMap<ObjectId, FoodItem> defaultRestaurant2Menu = new HashMap<>();
 
         defaultRestaurant2.setRestaurantMenu(defaultRestaurant2Menu);
         defaultRestaurant2.setIsActive(true);
 
         try {
-            ObjectId foodItem1Id = foodItemController.addFoodItem(defaultFood1).getId();
-            ObjectId foodItem2Id = foodItemController.addFoodItem(defaultFood2).getId();
-            ObjectId foodItem3Id = foodItemController.addFoodItem(defaultFood3).getId();
-            ObjectId foodItem4Id = foodItemController.addFoodItem(defaultFood4).getId();
-            defaultRestaurant1Menu.add(foodItem1Id);
-            defaultRestaurant1Menu.add(foodItem2Id);
-            defaultRestaurant2Menu.add(foodItem3Id);
-            defaultRestaurant2Menu.add(foodItem4Id);
+            defaultRestaurant1Menu.put(defaultFood1.getId(), defaultFood1);
+            defaultRestaurant1Menu.put(defaultFood2.getId(), defaultFood2);
+            defaultRestaurant2Menu.put(defaultFood3.getId(), defaultFood3);
+            defaultRestaurant2Menu.put(defaultFood4.getId(), defaultFood4);
             addRestaurant(defaultRestaurant1);
             addRestaurant(defaultRestaurant2);
         } catch (Exception e) {
@@ -94,7 +91,7 @@ public class RestaurantController {
     public Restaurant addRestaurant(@Nonnull Restaurant restaurant) throws ExceptionClass {
         log.debug("RestaurantController > addRestaurant(...)");
         if (!restaurant.isValid()) {
-            // TODO: replace with a real invalid object exception
+            // Replace with a real invalid object exception
             // probably not one exception per object type though
             throw new ExceptionClass("InvalidRestaurantException");
         }
@@ -102,7 +99,7 @@ public class RestaurantController {
         ObjectId id = restaurant.getId();
 
         if (id != null && restaurants.get(id) != null) {
-            // TODO: replace with a real duplicate key exception
+            // Replace with a real duplicate key exception
             throw new ExceptionClass("DuplicateKeyException");
         }
 

@@ -1,9 +1,7 @@
 package edu.northeastern.cs5500.delivery.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.ArrayList;
-
+import java.util.HashMap;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
@@ -12,7 +10,7 @@ public class Restaurant implements Model {
     private ObjectId id;
     private String restaurantName;
     private String restaurantDescription;
-    private ArrayList<ObjectId> restaurantMenu;
+    private HashMap<ObjectId, FoodItem> restaurantMenu;
     private String listedHours;
     private String cuisineType;
     private Boolean isActive;
