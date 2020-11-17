@@ -34,7 +34,7 @@ public class DeliveryDriverController {
         defaultDeliveryDriver1.setEmail("Shaun@hotmail.com");
         defaultDeliveryDriver1.setOrderId(order1.getId());
         defaultDeliveryDriver1.setPassword("aaa");
-        defaultDeliveryDriver1.setPhoneNumber(1234567891);
+        defaultDeliveryDriver1.setPhoneNumber(1234567890L);
         defaultDeliveryDriver1.setUsername("shaunho");
 
         final Order order2 = new Order();
@@ -44,7 +44,7 @@ public class DeliveryDriverController {
         defaultDeliveryDriver2.setEmail("Emily@hotmail.com");
         defaultDeliveryDriver2.setOrderId(order2.getId());
         defaultDeliveryDriver2.setPassword("aaa");
-        defaultDeliveryDriver2.setPhoneNumber(1234567891);
+        defaultDeliveryDriver2.setPhoneNumber(1234567891L);
         defaultDeliveryDriver2.setUsername("emilychiang");
 
         try {
@@ -58,20 +58,20 @@ public class DeliveryDriverController {
 
     @Nullable
     public DeliveryDriver getDeliveryDriver(@Nonnull ObjectId uuid) {
-        log.debug("DeliveryDriverController > getUser({})", uuid);
+        log.debug("DeliveryDriverController > getDeliveryDriver({})", uuid);
         return deliveryDrivers.get(uuid);
     }
 
     @Nonnull
-    public Collection<DeliveryDriver> getUsers() {
-        log.debug("DeliveryDriverController > getUsers()");
+    public Collection<DeliveryDriver> getDeliveryDrivers() {
+        log.debug("DeliveryDriverController > getDeliveryDrivers()");
         return deliveryDrivers.getAll();
     }
 
     @Nonnull
     public DeliveryDriver addDeliveryDriver(@Nonnull DeliveryDriver deliveryDriver)
-            throws Exception {
-        log.debug("DeliveryDriverController > addUser(...)");
+            throws ExceptionClass {
+        log.debug("DeliveryDriverController > addDeliveryDriver(...)");
         if (!deliveryDriver.isValid()) {
             throw new ExceptionClass("InvalidUserException");
         }
@@ -79,6 +79,10 @@ public class DeliveryDriverController {
         ObjectId id = deliveryDriver.getId();
         if (id != null && deliveryDrivers.get(id) != null) {
             throw new ExceptionClass("DuplicateKeyExecption");
+        }
+
+        if (!checkPhoneLength(deliveryDriver)) {
+            throw new ExceptionClass("PhoneNumberException");
         }
 
         if (!checkDuplicateUsername(allDeliveryDrivers, deliveryDriver)) {
@@ -98,13 +102,20 @@ public class DeliveryDriverController {
         return true;
     }
 
-    public void updateUser(@Nonnull DeliveryDriver driver) throws Exception {
-        log.debug("DeliveryDriverController > updateUser(...)");
+    private boolean checkPhoneLength(DeliveryDriver deliveryDriver) {
+        if (Long.toString(deliveryDriver.getPhoneNumber()).length() != 10) {
+            return false;
+        }
+        return true;
+    }
+
+    public void updateDeliveryDriver(@Nonnull DeliveryDriver driver) throws ExceptionClass {
+        log.debug("DeliveryDriverController > updateDeliveryDriver(...)");
         deliveryDrivers.update(driver);
     }
 
-    public void deleteUser(@Nonnull ObjectId id) throws Exception {
-        log.debug("DeliveryDriverController > deleteUser(...)");
+    public void deleteDeliveryDriver(@Nonnull ObjectId id) throws ExceptionClass {
+        log.debug("DeliveryDriverController > deleteDeliveryDriver(...)");
         deliveryDrivers.delete(id);
     }
 }

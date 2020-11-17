@@ -22,7 +22,7 @@ public class User extends Person {
             String firstName,
             String lastName,
             String email,
-            Integer phoneNumber,
+            Long phoneNumber,
             String address,
             String city,
             String state,
@@ -41,7 +41,7 @@ public class User extends Person {
                 && !firstName.isEmpty()
                 && !lastName.isEmpty()
                 && !email.isEmpty()
-                && Integer.toString(phoneNumber).length() == 10
+                && phoneNumber != null
                 && !address.isEmpty()
                 && !city.isEmpty()
                 && !state.isEmpty()
