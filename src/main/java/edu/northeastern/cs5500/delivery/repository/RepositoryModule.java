@@ -4,6 +4,8 @@ import dagger.Module;
 import dagger.Provides;
 import edu.northeastern.cs5500.delivery.model.CreditCard;
 import edu.northeastern.cs5500.delivery.model.Delivery;
+import edu.northeastern.cs5500.delivery.model.DeliveryDriver;
+import edu.northeastern.cs5500.delivery.model.Order;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.model.Review;
 import edu.northeastern.cs5500.delivery.model.User;
@@ -34,7 +36,7 @@ public class RepositoryModule {
     public GenericRepository<Order> provideOrderRepository() {
         return new InMemoryRepository<>();
     }
-    
+
     @Provides
     public GenericRepository<User> provideUserRepository() {
         return new InMemoryRepository<>();
@@ -46,27 +48,34 @@ public class RepositoryModule {
     }
 }
 
-/*
-=======
+// =======
 
 // Here's an example of how you imght swap out the in-memory repository for a database-backed
 // repository:
-package edu.northeastern.cs5500.delivery.repository;
-import dagger.Module;
-import dagger.Provides;
-import edu.northeastern.cs5500.delivery.model.Delivery;
-import edu.northeastern.cs5500.delivery.service.MongoDBService;
+// package edu.northeastern.cs5500.delivery.repository;
 
-    @Module public class RepositoryModule {
-    @Provides
-    public GenericRepository<Delivery> provideDeliveryRepository(MongoDBService mongoDBService) {
-        return new MongoDBRepository<>(Delivery.class, mongoDBService);
-    }
+// import dagger.Module;
+// import dagger.Provides;
+// import edu.northeastern.cs5500.delivery.model.Delivery;
+// import edu.northeastern.cs5500.delivery.model.User;
+// import edu.northeastern.cs5500.delivery.service.MongoDBService;
 
-    @Module public class RepositoryModule {
-    @Provides
-    public GenericRepository<Restaurant> provideRestaurantRepository(MongoDBService mongoDBService) {
-        return new MongoDBRepository<>(Restaurant.class, mongoDBService);
-    }
-}
-*/
+// @Module
+// public class RepositoryModule {
+//     @Provides
+//     public GenericRepository<Delivery> provideDeliveryRepository(MongoDBService mongoDBService) {
+//         return new MongoDBRepository<>(Delivery.class, mongoDBService);
+//     }
+
+//     @Provides
+//     public GenericRepository<User> provideUserRepository(MongoDBService mongoDBService) {
+//         return new MongoDBRepository<>(User.class, mongoDBService);
+//     }
+
+    // @Module public class RepositoryModule {
+    // @Provides
+    // public GenericRepository<Restaurant> provideRestaurantRepository(MongoDBService
+    // mongoDBService) {
+    //     return new MongoDBRepository<>(Restaurant.class, mongoDBService);
+    // }
+// }

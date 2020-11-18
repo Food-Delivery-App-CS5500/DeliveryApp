@@ -121,7 +121,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void testAddDuplicateUsername() {
+    void testAddDuplicateUsername() throws ExceptionClass {
         User dupUser = new User();
         dupUser.setFirstName("Jennie");
         dupUser.setLastName("Zhang");
@@ -131,11 +131,11 @@ public class UserControllerTest {
         dupUser.setCity("Seattle");
         dupUser.setZip("12345");
         dupUser.setEmail("aa@gmail.com");
-        dupUser.setPhoneNumber(1234567891021L);
+        dupUser.setPhoneNumber(1234567891L);
         dupUser.setUsername("jenChang");
 
         UserController userController = new UserController(new InMemoryRepository<User>());
-
+        User addedUser1 = userController.addUser(user1);
         Assertions.assertThrows(
                 Exception.class,
                 () -> {
