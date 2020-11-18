@@ -47,8 +47,10 @@ public class DeliveryView implements View {
                     final ObjectId id = new ObjectId(paramId);
                     Delivery delivery = deliveryController.getDelivery(id);
                     if (delivery == null) {
+                        System.out.println("INSIDE NULL");
                         halt(404);
                     }
+                    System.out.println("OUTSIDE NULL");
                     response.type("application/json");
                     return delivery;
                 },
