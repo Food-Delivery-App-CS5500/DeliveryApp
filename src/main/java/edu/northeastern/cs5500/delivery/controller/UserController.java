@@ -89,7 +89,7 @@ public class UserController {
             throw new ExceptionClass("PhoneNumberException");
         }
 
-        if (!checkDuplicateUsername(allUsers, user)) {
+        if (checkDuplicateUsername(allUsers, user)) {
             throw new ExceptionClass("DuplicateUsernameException");
         }
 
@@ -102,11 +102,11 @@ public class UserController {
 
     private boolean checkDuplicateUsername(Collection<User> users, User userToCheck) {
         for (User user : users) {
-            if (user.getUsername() == userToCheck.getUsername()) {
-                return false;
+            if (user.getUsername().equals(userToCheck.getUsername())) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean checkPhoneLength(User user) {
