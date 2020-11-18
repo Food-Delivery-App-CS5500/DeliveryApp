@@ -31,7 +31,7 @@ public class DeliveryView implements View {
         log.info("DeliveryView > register");
 
         get(
-                "/delivery/",
+                "/delivery",
                 (request, response) -> {
                     log.debug("/delivery");
                     response.type("application/json");
@@ -55,7 +55,7 @@ public class DeliveryView implements View {
                 jsonTransformer);
 
         post(
-                "/delivery/",
+                "/delivery",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     Delivery delivery = mapper.readValue(request.body(), Delivery.class);
@@ -74,7 +74,7 @@ public class DeliveryView implements View {
                 });
 
         put(
-                "/delivery/",
+                "/delivery",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     Delivery delivery = mapper.readValue(request.body(), Delivery.class);
@@ -88,7 +88,7 @@ public class DeliveryView implements View {
                 });
 
         delete(
-                "/delivery/",
+                "/delivery",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     Delivery delivery = mapper.readValue(request.body(), Delivery.class);
