@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.delivery.controller;
 
+import edu.northeastern.cs5500.delivery.model.FoodItem;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.repository.GenericRepository;
 import java.util.Collection;
@@ -28,25 +29,44 @@ public class RestaurantController {
 
         log.info("RestaurantController > construct > adding default restaurants");
 
+        // Create 2 default restaurants to reside in the Restaurant Controller
         final Restaurant defaultRestaurant1 = new Restaurant();
         defaultRestaurant1.setRestaurantName("Best Pizza");
         defaultRestaurant1.setRestaurantDescription("Best taste from Italy!");
-        HashMap<String, Double> defaultRestaurant1Menu = new HashMap<>();
-        defaultRestaurant1Menu.put("Pepperoni Pizza", 10.99);
-        defaultRestaurant1Menu.put("Cheese Pizza", 8.99);
+        FoodItem defaultFood1 = new FoodItem();
+        defaultFood1.setId(new ObjectId());
+        defaultFood1.setFoodItem("Pepperoni Pizza");
+        defaultFood1.setFoodPrice(1099);
+        FoodItem defaultFood2 = new FoodItem();
+        defaultFood2.setId(new ObjectId());
+        defaultFood2.setFoodItem("Cheese Pizza");
+        defaultFood2.setFoodPrice(899);
+        HashMap<ObjectId, FoodItem> defaultRestaurant1Menu = new HashMap<>();
+
         defaultRestaurant1.setRestaurantMenu(defaultRestaurant1Menu);
         defaultRestaurant1.setIsActive(true);
 
         final Restaurant defaultRestaurant2 = new Restaurant();
         defaultRestaurant2.setRestaurantName("Salads and Smoothies");
         defaultRestaurant2.setRestaurantDescription("Live and eat healthy!");
-        HashMap<String, Double> defaultRestaurant2Menu = new HashMap<>();
-        defaultRestaurant2Menu.put("Fresh Tossed Salad - 1 protein, large", 11.99);
-        defaultRestaurant2Menu.put("Banana, Mango Kale Fusion Smoothie", 8.99);
-        defaultRestaurant1.setRestaurantMenu(defaultRestaurant2Menu);
-        defaultRestaurant1.setIsActive(true);
+        FoodItem defaultFood3 = new FoodItem();
+        defaultFood3.setId(new ObjectId());
+        defaultFood3.setFoodItem("Fresh Tossed Salad - 1 protein, large");
+        defaultFood3.setFoodPrice(1199);
+        FoodItem defaultFood4 = new FoodItem();
+        defaultFood4.setId(new ObjectId());
+        defaultFood4.setFoodItem("Banana, Mango Kale Fusion Smoothie");
+        defaultFood4.setFoodPrice(899);
+        HashMap<ObjectId, FoodItem> defaultRestaurant2Menu = new HashMap<>();
+
+        defaultRestaurant2.setRestaurantMenu(defaultRestaurant2Menu);
+        defaultRestaurant2.setIsActive(true);
 
         try {
+            defaultRestaurant1Menu.put(defaultFood1.getId(), defaultFood1);
+            defaultRestaurant1Menu.put(defaultFood2.getId(), defaultFood2);
+            defaultRestaurant2Menu.put(defaultFood3.getId(), defaultFood3);
+            defaultRestaurant2Menu.put(defaultFood4.getId(), defaultFood4);
             addRestaurant(defaultRestaurant1);
             addRestaurant(defaultRestaurant2);
         } catch (Exception e) {
@@ -71,15 +91,15 @@ public class RestaurantController {
     public Restaurant addRestaurant(@Nonnull Restaurant restaurant) throws ExceptionClass {
         log.debug("RestaurantController > addRestaurant(...)");
         if (!restaurant.isValid()) {
-            // TODO: replace with a real invalid object exception
-            // probably not one exception per object type though...
+            // Replace with a real invalid object exception
+            // probably not one exception per object type though
             throw new ExceptionClass("InvalidRestaurantException");
         }
 
         ObjectId id = restaurant.getId();
 
         if (id != null && restaurants.get(id) != null) {
-            // TODO: replace with a real duplicate key exception
+            // Replace with a real duplicate key exception
             throw new ExceptionClass("DuplicateKeyException");
         }
 
