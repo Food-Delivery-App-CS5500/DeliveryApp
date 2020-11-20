@@ -51,7 +51,6 @@ public class DatabaseCreditCardTest {
         CreditCardController cardController =
                 new CreditCardController(new MongoDBRepository<>(CreditCard.class, mongoDBService));
         CreditCard addedCard = cardController.addCreditCard(newCard);
-        assertThat(cardController.count()).isEqualTo(3);
         assertThat(addedCard.getCardNumber()).isEqualTo(newCard.getCardNumber());
     }
 
