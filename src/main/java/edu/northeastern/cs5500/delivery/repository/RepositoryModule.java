@@ -75,4 +75,10 @@ public class RepositoryModule {
             MongoDBService mongoDBService) {
         return new MongoDBRepository<>(CreditCard.class, mongoDBService);
     }
+
+    @Provides
+    public GenericRepository<User> provideUserRepository(
+            MongoDBService mongoDBService) {
+        return new MongoDBRepository<>(User.class, mongoDBService);
+    }
 }
