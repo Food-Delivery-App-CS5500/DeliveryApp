@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-abstract class Person implements Model {
+public abstract class Person implements Model {
     protected String username;
     protected String password;
     protected String firstName;

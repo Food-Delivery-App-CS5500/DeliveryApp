@@ -47,8 +47,10 @@ public class DeliveryView implements View {
                     final ObjectId id = new ObjectId(paramId);
                     Delivery delivery = deliveryController.getDelivery(id);
                     if (delivery == null) {
+                        System.out.println("INSIDE NULL");
                         halt(404);
                     }
+                    System.out.println("OUTSIDE NULL");
                     response.type("application/json");
                     System.out.println("Get 1 delivery item");
                     return delivery;
@@ -73,8 +75,7 @@ public class DeliveryView implements View {
 
                     // response.redirect(
                     //        String.format("/delivery/{}", delivery.getId().toHexString()), 301);
-                    response.redirect("/delivery/addedAnDelivery");
-                    System.out.println("new method successfully added a delivery!");
+                  
                     return delivery;
                 });
 
