@@ -8,8 +8,8 @@ import static spark.Spark.put;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.northeastern.cs5500.delivery.JsonTransformer;
-import edu.northeastern.cs5500.delivery.controller.DeliveryController;
-import edu.northeastern.cs5500.delivery.model.Delivery;
+import edu.northeastern.cs5500.delivery.controller.UserController;
+import edu.northeastern.cs5500.delivery.model.User;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -17,86 +17,84 @@ import org.bson.types.ObjectId;
 
 @Singleton
 @Slf4j
-public class DeliveryView implements View {
+public class UserView implements View {
 
     @Inject
-    DeliveryView() {}
+    UserView() {}
 
     @Inject JsonTransformer jsonTransformer;
 
-    @Inject DeliveryController deliveryController;
+    @Inject UserController userController;
 
     @Override
     public void register() {
-        log.info("DeliveryView > register");
+        log.info("UserView > register");
 
         get(
-                "/delivery",
+                "/user/",
                 (request, response) -> {
-                    log.debug("/delivery");
+                    log.debug("/user");
                     response.type("application/json");
-                    return deliveryController.getDeliverys();
+                    return userController.getUsers();
                 },
                 jsonTransformer);
 
         get(
-                "/delivery/:id",
+                "/user/:id",
                 (request, response) -> {
                     final String paramId = request.params(":id");
-                    log.debug("/delivery/:id<{}>", paramId);
+                    log.debug("/user/:id<{}>", paramId);
                     final ObjectId id = new ObjectId(paramId);
-                    Delivery delivery = deliveryController.getDelivery(id);
-                    if (delivery == null) {
-                        System.out.println("INSIDE NULL");
+                    User user = userController.getUser(id);
+                    if (user == null) {
                         halt(404);
                     }
-                    System.out.println("OUTSIDE NULL");
                     response.type("application/json");
-                    return delivery;
+                    return user;
                 },
                 jsonTransformer);
 
         post(
-                "/delivery",
+                "/user/",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
-                    if (!delivery.isValid()) {
+                    User user = mapper.readValue(request.body(), User.class);
+                    if (!user.isValid()) {
                         response.status(400);
                         return "";
                     }
 
                     // Ignore the user-provided ID if there is one
-                    delivery.setId(null);
-                    delivery = deliveryController.addDelivery(delivery);
+                    user.setId(null);
+                    user = userController.addUser(user);
 
                     // response.redirect(
-                    //         String.format("/delivery/{}", delivery.getId().toHexString()), 301);
-                    return delivery;
+                    //         String.format("/user/{}", user.getId().toHexString()), 301);
+                    return user;
                 });
 
         put(
-                "/delivery",
+                "/user/",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
-                    if (!delivery.isValid()) {
+                    User user = mapper.readValue(request.body(), User.class);
+                    if (!user.isValid()) {
                         response.status(400);
                         return "";
                     }
 
-                    deliveryController.updateDelivery(delivery);
-                    return delivery;
+                    userController.updateUser(user);
+                    return user;
                 });
 
         delete(
-                "/delivery",
+                "/user/",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
+                    User user = mapper.readValue(request.body(), User.class);
 
-                    deliveryController.deleteDelivery(delivery.getId());
-                    return delivery;
+                    userController.deleteUser(user.getId());
+                    return user;
                 });
     }
 }
