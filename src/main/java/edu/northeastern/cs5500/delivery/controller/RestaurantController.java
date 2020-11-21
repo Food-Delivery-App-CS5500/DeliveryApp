@@ -81,11 +81,18 @@ public class RestaurantController {
         return restaurants.get(uuid);
     }
 
+    public Restaurant getRestaurant(String restaurantName) {
+        
+        return;
+    }
+
     @Nonnull
     public Collection<Restaurant> getRestaurants() {
         log.debug("RestaurantController > getRestaurants()");
         return restaurants.getAll();
     }
+
+
 
     @Nonnull
     public Restaurant addRestaurant(@Nonnull Restaurant restaurant) throws ExceptionClass {
