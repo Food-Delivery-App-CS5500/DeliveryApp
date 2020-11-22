@@ -19,6 +19,7 @@ public class Restaurant implements Model {
     private String city;
     private String state;
     private Integer zipCode;
+    // private Integer earnings;
 
     /** @return true if this restaurant is valid */
     @JsonIgnore

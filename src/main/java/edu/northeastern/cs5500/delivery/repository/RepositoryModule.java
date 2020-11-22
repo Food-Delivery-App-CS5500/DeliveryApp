@@ -72,10 +72,13 @@ public class RepositoryModule {
 //         return new MongoDBRepository<>(User.class, mongoDBService);
 //     }
 
-    // @Module public class RepositoryModule {
     // @Provides
     // public GenericRepository<Restaurant> provideRestaurantRepository(MongoDBService
     // mongoDBService) {
     //     return new MongoDBRepository<>(Restaurant.class, mongoDBService);
     // }
+
+    // @Provides
+    // public GenericRepository<Order> provideOrderRepository(MongoDBService mongoDBService) {
+    //     return new MongoDBRepository<>(Restaurant.class, mongoDBService);
 // }
