@@ -34,5 +34,4 @@ public class ViewModule {
     @IntoSet
     public View provideOrderView(OrderView orderView) {
         return orderView;
-    }
 }

@@ -23,6 +23,6 @@ public class Order implements Model {
     /** @return true if this order is valid */
     @JsonIgnore
     public boolean isValid() {
-        return !userName.isEmpty() && !orderFoodItems.isEmpty();
+        return restaurantId != null && orderFoodItems != null && !orderFoodItems.isEmpty();
     }
 }

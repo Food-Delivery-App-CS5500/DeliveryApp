@@ -8,8 +8,8 @@ import static spark.Spark.put;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.northeastern.cs5500.delivery.JsonTransformer;
-import edu.northeastern.cs5500.delivery.controller.DeliveryController;
-import edu.northeastern.cs5500.delivery.model.Delivery;
+import edu.northeastern.cs5500.delivery.controller.CreditCardController;
+import edu.northeastern.cs5500.delivery.model.CreditCard;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -17,90 +17,82 @@ import org.bson.types.ObjectId;
 
 @Singleton
 @Slf4j
-public class DeliveryView implements View {
+public class CreditCardView implements View {
 
     @Inject
-    DeliveryView() {}
+    CreditCardView() {}
 
     @Inject JsonTransformer jsonTransformer;
 
-    @Inject DeliveryController deliveryController;
+    @Inject CreditCardController creditCardController;
 
     @Override
     public void register() {
-        log.info("DeliveryView > register");
+        log.info("CreditCardView > register");
 
         get(
-                "/delivery",
+                "/creditcard",
                 (request, response) -> {
-                    log.debug("/delivery");
+                    log.debug("/creditcard");
                     response.type("application/json");
-                    return deliveryController.getDeliverys();
+                    return creditCardController.getCreditCards();
                 },
                 jsonTransformer);
 
         get(
-                "/delivery/:id",
+                "/creditcard/:id",
                 (request, response) -> {
                     final String paramId = request.params(":id");
-                    log.debug("/delivery/:id<{}>", paramId);
+                    log.debug("/creditcard/:id<{}>", paramId);
                     final ObjectId id = new ObjectId(paramId);
-                    Delivery delivery = deliveryController.getDelivery(id);
-                    if (delivery == null) {
-                        System.out.println("INSIDE NULL");
+                    CreditCard card = creditCardController.getCreditCard(id);
+                    if (card == null) {
                         halt(404);
                     }
-                    System.out.println("OUTSIDE NULL");
                     response.type("application/json");
-                    System.out.println("Get 1 delivery item");
-                    return delivery;
+                    return card;
                 },
                 jsonTransformer);
 
         post(
-                "/delivery",
+                "/creditcard",
                 (request, response) -> {
-                    System.out.println("We are here");
                     ObjectMapper mapper = new ObjectMapper();
-
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
-                    if (!delivery.isValid()) {
+                    CreditCard card = mapper.readValue(request.body(), CreditCard.class);
+                    if (!card.isValid()) {
                         response.status(400);
                         return "";
                     }
 
                     // Ignore the user-provided ID if there is one
-                    delivery.setId(null);
-                    delivery = deliveryController.addDelivery(delivery);
+                    card.setId(null);
+                    card = creditCardController.addCreditCard(card);
 
                     // response.redirect(
                     //        String.format("/delivery/{}", delivery.getId().toHexString()), 301);
-                  
-                    return delivery;
+                    return card;
                 });
 
         put(
-                "/delivery",
+                "/creditcard",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
-                    if (!delivery.isValid()) {
+                    CreditCard card = mapper.readValue(request.body(), CreditCard.class);
+                    if (!card.isValid()) {
                         response.status(400);
                         return "";
                     }
-
-                    deliveryController.updateDelivery(delivery);
-                    return delivery;
+                    creditCardController.updateCreditCard(card);
+                    return card;
                 });
 
         delete(
-                "/delivery",
+                "/creditcard",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
-
-                    deliveryController.deleteDelivery(delivery.getId());
-                    return delivery;
+                    CreditCard card = mapper.readValue(request.body(), CreditCard.class);
+                    creditCardController.deleteCreditCard(card.getId());
+                    return card;
                 });
     }
 }
