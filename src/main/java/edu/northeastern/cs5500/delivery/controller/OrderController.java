@@ -48,7 +48,11 @@ public class OrderController {
         defaultFood2.setFoodItem("Carbonara Sausage Classic");
         defaultFood2.setFoodPrice(1799);
         HashMap<ObjectId, FoodItem> defaultOrderRestaurant1Menu = new HashMap<>();
+        defaultOrderRestaurant1Menu.put(defaultFood1.getId(), defaultFood1);
+        defaultOrderRestaurant1Menu.put(defaultFood2.getId(), defaultFood2);
+        defaultOrderRestaurant1.setRestaurantMenu(defaultOrderRestaurant1Menu);
         final Order defaultOrder1 = new Order();
+        defaultOrder1.setId(new ObjectId());
         defaultOrder1.setUserName("John Doe");
         defaultOrder1.setRestaurantId(defaultOrderRestaurant1Id);
         HashMap<ObjectId, Integer> order1Items = new HashMap<>();
@@ -62,6 +66,7 @@ public class OrderController {
         defaultOrderPaymentCard1.setExpirationDate(LocalDate.of(2024, 4, 2));
         defaultOrderPaymentCard1.setUserName("Tisha Doe");
         defaultOrder1.setPaymentCard(defaultOrderPaymentCard1);
+        defaultOrder1.setOrderFoodItems(order1Items);
 
         final Restaurant defaultOrderRestaurant2 = new Restaurant();
         defaultOrderRestaurant2.setId(new ObjectId());
@@ -77,7 +82,11 @@ public class OrderController {
         defaultFood4.setFoodItem("Regular Meal");
         defaultFood4.setFoodPrice(1449);
         HashMap<ObjectId, FoodItem> defaultOrderRestaurant2Menu = new HashMap<>();
+        defaultOrderRestaurant2Menu.put(defaultFood3.getId(), defaultFood3);
+        defaultOrderRestaurant2Menu.put(defaultFood4.getId(), defaultFood4);
+        defaultOrderRestaurant2.setRestaurantMenu(defaultOrderRestaurant2Menu);
         final Order defaultOrder2 = new Order();
+        defaultOrder2.setId(new ObjectId());
         defaultOrder2.setUserName("Jane Doe");
         defaultOrder2.setRestaurantId(defaultOrderRestaurant2Id);
         HashMap<ObjectId, Integer> order2Items = new HashMap<>();
@@ -92,14 +101,8 @@ public class OrderController {
         defaultOrderPaymentCard2.setExpirationDate(LocalDate.of(2026, 6, 11));
         defaultOrderPaymentCard2.setUserName("Jane Doe");
         defaultOrder2.setPaymentCard(defaultOrderPaymentCard2);
-
+        defaultOrder2.setOrderFoodItems(order2Items);
         try {
-            defaultOrderRestaurant1Menu.put(defaultFood1.getId(), defaultFood1);
-            defaultOrderRestaurant1Menu.put(defaultFood2.getId(), defaultFood2);
-            defaultOrderRestaurant2Menu.put(defaultFood3.getId(), defaultFood3);
-            defaultOrderRestaurant2Menu.put(defaultFood4.getId(), defaultFood4);
-            defaultOrderRestaurant1.setRestaurantMenu(defaultOrderRestaurant1Menu);
-            defaultOrderRestaurant2.setRestaurantMenu(defaultOrderRestaurant2Menu);
             addOrder(defaultOrder1);
             addOrder(defaultOrder2);
         } catch (Exception e) {

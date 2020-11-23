@@ -44,6 +44,7 @@ public class RestaurantController {
         HashMap<ObjectId, FoodItem> defaultRestaurant1Menu = new HashMap<>();
 
         defaultRestaurant1.setRestaurantMenu(defaultRestaurant1Menu);
+        // defaultRestaurant1.setEarnings(0);
         defaultRestaurant1.setIsActive(true);
 
         final Restaurant defaultRestaurant2 = new Restaurant();
@@ -60,6 +61,7 @@ public class RestaurantController {
         HashMap<ObjectId, FoodItem> defaultRestaurant2Menu = new HashMap<>();
 
         defaultRestaurant2.setRestaurantMenu(defaultRestaurant2Menu);
+        // defaultRestaurant2.setEarnings(0);
         defaultRestaurant2.setIsActive(true);
 
         try {
