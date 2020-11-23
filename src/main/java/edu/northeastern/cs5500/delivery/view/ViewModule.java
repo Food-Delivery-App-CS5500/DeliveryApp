@@ -34,9 +34,11 @@ public class ViewModule {
     @IntoSet
     public View provideOrderView(OrderView orderView) {
         return orderView;
+    }
 
     @Provides
     @IntoSet
     public View provideCreditCardView(CreditCardView creditCardView) {
         return creditCardView;
+    }
 }

@@ -71,7 +71,8 @@ public class RestaurantView implements View {
                     restaurant = restaurantController.addRestaurant(restaurant);
 
                     // response.redirect(
-                    //         String.format("/restaurant/{}", restaurant.getId().toHexString()), 301);
+                    //         String.format("/restaurant/{}", restaurant.getId().toHexString()),
+                    // 301);
                     return restaurant;
                 });
 

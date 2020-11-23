@@ -75,7 +75,7 @@ public class DeliveryView implements View {
 
                     // response.redirect(
                     //        String.format("/delivery/{}", delivery.getId().toHexString()), 301);
-                  
+
                     return delivery;
                 });
 
