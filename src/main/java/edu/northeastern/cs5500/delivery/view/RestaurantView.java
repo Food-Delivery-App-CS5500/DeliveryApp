@@ -8,8 +8,8 @@ import static spark.Spark.put;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.northeastern.cs5500.delivery.JsonTransformer;
-import edu.northeastern.cs5500.delivery.controller.DeliveryController;
-import edu.northeastern.cs5500.delivery.model.Delivery;
+import edu.northeastern.cs5500.delivery.controller.RestaurantController;
+import edu.northeastern.cs5500.delivery.model.Restaurant;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -17,90 +17,87 @@ import org.bson.types.ObjectId;
 
 @Singleton
 @Slf4j
-public class DeliveryView implements View {
+public class RestaurantView implements View {
 
     @Inject
-    DeliveryView() {}
+    RestaurantView() {}
 
     @Inject JsonTransformer jsonTransformer;
 
-    @Inject DeliveryController deliveryController;
+    @Inject RestaurantController restaurantController;
 
     @Override
     public void register() {
-        log.info("DeliveryView > register");
+        log.info("RestaurantView > register");
 
         get(
-                "/delivery",
+                "/restaurant",
                 (request, response) -> {
-                    log.debug("/delivery");
+                    log.debug("/restaurant");
                     response.type("application/json");
-                    return deliveryController.getDeliverys();
+                    return restaurantController.getRestaurants();
                 },
                 jsonTransformer);
 
         get(
-                "/delivery/:id",
+                "/restaurant/:id",
                 (request, response) -> {
                     final String paramId = request.params(":id");
-                    log.debug("/delivery/:id<{}>", paramId);
+                    log.debug("/restaurant/:id<{}>", paramId);
                     final ObjectId id = new ObjectId(paramId);
-                    Delivery delivery = deliveryController.getDelivery(id);
-                    if (delivery == null) {
+                    Restaurant restaurant = restaurantController.getRestaurant(id);
+                    if (restaurant == null) {
                         System.out.println("INSIDE NULL");
                         halt(404);
                     }
                     System.out.println("OUTSIDE NULL");
                     response.type("application/json");
-                    System.out.println("Get 1 delivery item");
-                    return delivery;
+                    return restaurant;
                 },
                 jsonTransformer);
 
         post(
-                "/delivery",
+                "/restaurant",
                 (request, response) -> {
-                    System.out.println("We are here");
                     ObjectMapper mapper = new ObjectMapper();
-
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
-                    if (!delivery.isValid()) {
+                    Restaurant restaurant = mapper.readValue(request.body(), Restaurant.class);
+                    if (!restaurant.isValid()) {
                         response.status(400);
                         return "";
                     }
 
                     // Ignore the user-provided ID if there is one
-                    delivery.setId(null);
-                    delivery = deliveryController.addDelivery(delivery);
+                    restaurant.setId(null);
+                    restaurant = restaurantController.addRestaurant(restaurant);
 
                     // response.redirect(
-                    //        String.format("/delivery/{}", delivery.getId().toHexString()), 301);
-
-                    return delivery;
+                    //         String.format("/restaurant/{}", restaurant.getId().toHexString()),
+                    // 301);
+                    return restaurant;
                 });
 
         put(
-                "/delivery",
+                "/restaurant",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
-                    if (!delivery.isValid()) {
+                    Restaurant restaurant = mapper.readValue(request.body(), Restaurant.class);
+                    if (!restaurant.isValid()) {
                         response.status(400);
                         return "";
                     }
 
-                    deliveryController.updateDelivery(delivery);
-                    return delivery;
+                    restaurantController.updateRestaurant(restaurant);
+                    return restaurant;
                 });
 
         delete(
-                "/delivery",
+                "/restaurant",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    Delivery delivery = mapper.readValue(request.body(), Delivery.class);
+                    Restaurant restaurant = mapper.readValue(request.body(), Restaurant.class);
 
-                    deliveryController.deleteDelivery(delivery.getId());
-                    return delivery;
+                    restaurantController.deleteRestaurant(restaurant.getId());
+                    return restaurant;
                 });
     }
 }
