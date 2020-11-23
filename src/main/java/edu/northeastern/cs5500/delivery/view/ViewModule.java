@@ -23,4 +23,16 @@ public class ViewModule {
     public View provideStatusView(StatusView statusView) {
         return statusView;
     }
+
+    @Provides
+    @IntoSet
+    public View provideRestaurantView(RestaurantView restaurantView) {
+        return restaurantView;
+    }
+
+    @Provides
+    @IntoSet
+    public View provideOrderView(OrderView orderView) {
+        return orderView;
+    }
 }
