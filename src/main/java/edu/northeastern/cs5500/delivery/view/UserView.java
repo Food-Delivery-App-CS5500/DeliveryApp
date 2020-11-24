@@ -31,7 +31,7 @@ public class UserView implements View {
         log.info("UserView > register");
 
         get(
-                "/user/",
+                "/user",
                 (request, response) -> {
                     log.debug("/user");
                     response.type("application/json");
@@ -55,7 +55,7 @@ public class UserView implements View {
                 jsonTransformer);
 
         post(
-                "/user/",
+                "/user",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     User user = mapper.readValue(request.body(), User.class);
@@ -74,7 +74,7 @@ public class UserView implements View {
                 });
 
         put(
-                "/user/",
+                "/user",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     User user = mapper.readValue(request.body(), User.class);
@@ -88,7 +88,7 @@ public class UserView implements View {
                 });
 
         delete(
-                "/user/",
+                "/user",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     User user = mapper.readValue(request.body(), User.class);

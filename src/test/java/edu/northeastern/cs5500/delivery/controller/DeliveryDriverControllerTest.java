@@ -125,7 +125,7 @@ public class DeliveryDriverControllerTest {
     }
 
     @Test
-    void testAddDuplicateUsername() {
+    void testAddDuplicateUsername() throws ExceptionClass {
         DeliveryDriver dupUser = new DeliveryDriver();
         dupUser.setFirstName("Jennie");
         dupUser.setLastName("Zhang");
@@ -136,7 +136,7 @@ public class DeliveryDriverControllerTest {
 
         DeliveryDriverController deliveryDriverController =
                 new DeliveryDriverController(new InMemoryRepository<DeliveryDriver>());
-
+        deliveryDriverController.addDeliveryDriver(DeliveryDriver1);
         Assertions.assertThrows(
                 Exception.class,
                 () -> {

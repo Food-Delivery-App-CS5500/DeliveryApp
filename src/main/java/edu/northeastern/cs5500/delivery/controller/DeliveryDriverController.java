@@ -94,7 +94,7 @@ public class DeliveryDriverController {
     private boolean checkDuplicateUsername(
             Collection<DeliveryDriver> deliveryDrivers, DeliveryDriver driverToCheck) {
         for (DeliveryDriver driver : deliveryDrivers) {
-            if (driverToCheck.getUsername() == driver.getUsername()) {
+            if (driverToCheck.getUsername().equals(driver.getUsername())) {
                 return false;
             }
         }
