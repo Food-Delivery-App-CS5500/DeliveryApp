@@ -41,15 +41,15 @@ public class OrderControllerTest {
         testFood2.setId(new ObjectId());
         testFood2.setFoodItem("Masala Dosa");
         testFood2.setFoodPrice(1099);
-        HashMap<ObjectId, FoodItem> testRestaurant1Menu = new HashMap<>();
-        testRestaurant1Menu.put(testFood1.getId(), testFood1);
-        testRestaurant1Menu.put(testFood2.getId(), testFood2);
+        HashMap<String, FoodItem> testRestaurant1Menu = new HashMap<>();
+        testRestaurant1Menu.put(testFood1.getId().toString(), testFood1);
+        testRestaurant1Menu.put(testFood2.getId().toString(), testFood2);
         testRestaurant1.setRestaurantMenu(testRestaurant1Menu);
 
         testOrder1.setUserName("James Tenzing");
         testOrder1.setRestaurantId(testRestaurant1Id);
-        HashMap<ObjectId, Integer> testOrder1Items = new HashMap<>();
-        testOrder1Items.put(testFood2.getId(), 2);
+        HashMap<String, Integer> testOrder1Items = new HashMap<>();
+        testOrder1Items.put(testFood2.getId().toString(), 2);
         testOrder1.setComment("Extra chutney please!");
         testOrder1.setOrderTime(LocalDateTime.now());
         testOrder1.setStatus(OrderStatus.ORDERPLACED);
@@ -63,9 +63,9 @@ public class OrderControllerTest {
 
         testOrder2.setUserName("Giana Hill");
         testOrder2.setRestaurantId(testRestaurant1Id);
-        HashMap<ObjectId, Integer> testOrder2Items = new HashMap<>();
-        testOrder2Items.put(testFood1.getId(), 1);
-        testOrder2Items.put(testFood2.getId(), 2);
+        HashMap<String, Integer> testOrder2Items = new HashMap<>();
+        testOrder2Items.put(testFood1.getId().toString(), 1);
+        testOrder2Items.put(testFood2.getId().toString(), 2);
         testOrder2.setComment("Extra curry and napkins please!");
         testOrder2.setOrderTime(LocalDateTime.now());
         testOrder2.setStatus(OrderStatus.ORDERPLACED);
@@ -111,7 +111,7 @@ public class OrderControllerTest {
         testFood1.setId(new ObjectId());
         testFood1.setFoodItem("Plain Dosa");
         testFood1.setFoodPrice(899);
-        testOrder1.getOrderFoodItems().put(testFood1.getId(), 2);
+        testOrder1.getOrderFoodItems().put(testFood1.getId().toString(), 2);
         orderController.updateOrder(testOrder1);
         assertEquals(testOrder1, orderController.getOrder(testOrder1Id));
         assertEquals(2, orderController.getOrder(testOrder1Id).getOrderFoodItems().size());
