@@ -135,7 +135,7 @@ public class UserControllerTest {
         dupUser.setUsername("jenChang");
 
         UserController userController = new UserController(new InMemoryRepository<User>());
-        User addedUser1 = userController.addUser(user1);
+        userController.addUser(user1);
         Assertions.assertThrows(
                 Exception.class,
                 () -> {

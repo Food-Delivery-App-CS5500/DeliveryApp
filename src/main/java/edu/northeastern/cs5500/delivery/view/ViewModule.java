@@ -20,6 +20,12 @@ public class ViewModule {
 
     @Provides
     @IntoSet
+    public View provideDeliveryDriverView(DeliveryDriverView deliveryDriverView) {
+        return deliveryDriverView;
+    }
+
+    @Provides
+    @IntoSet
     public View provideStatusView(StatusView statusView) {
         return statusView;
     }
