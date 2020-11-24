@@ -10,7 +10,7 @@ public class Restaurant implements Model {
     private ObjectId id;
     private String restaurantName;
     private String restaurantDescription;
-    private HashMap<ObjectId, FoodItem> restaurantMenu;
+    private HashMap<String, FoodItem> restaurantMenu;
     private String listedHours;
     private String cuisineType;
     private Boolean isActive;

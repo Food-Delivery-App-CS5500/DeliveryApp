@@ -12,7 +12,7 @@ public class Order implements Model {
     private ObjectId id;
     private String userName;
     private ObjectId restaurantId;
-    private HashMap<ObjectId, Integer> orderFoodItems;
+    private HashMap<String, Integer> orderFoodItems;
     private String comment;
     private LocalDateTime orderTime;
     private LocalDateTime scheduleDelivery;
