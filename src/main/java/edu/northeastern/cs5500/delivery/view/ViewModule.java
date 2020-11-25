@@ -47,4 +47,10 @@ public class ViewModule {
     public View provideCreditCardView(CreditCardView creditCardView) {
         return creditCardView;
     }
+
+    @Provides
+    @IntoSet
+    public View provideFoodItemView(FoodItemView foodItemView) {
+        return foodItemView;
+    }
 }

@@ -5,6 +5,7 @@
 // import edu.northeastern.cs5500.delivery.model.CreditCard;
 // import edu.northeastern.cs5500.delivery.model.Delivery;
 // import edu.northeastern.cs5500.delivery.model.DeliveryDriver;
+// import edu.northeastern.cs5500.delivery.model.FoodItem;
 // import edu.northeastern.cs5500.delivery.model.Order;
 // import edu.northeastern.cs5500.delivery.model.Restaurant;
 // import edu.northeastern.cs5500.delivery.model.Review;
@@ -44,6 +45,11 @@
 
 //     @Provides
 //     public GenericRepository<DeliveryDriver> provideDeliveryDriverRepository() {
+//         return new InMemoryRepository<>();
+//     }
+
+//     @Provides
+//     public GenericRepository<FoodItem> provideFoodItemRepository() {
 //         return new InMemoryRepository<>();
 //     }
 // }
@@ -95,5 +101,10 @@ public class RepositoryModule {
     @Provides
     public GenericRepository<Review> provideReviewRepository(MongoDBService mongoDBService) {
         return new MongoDBRepository<>(Review.class, mongoDBService);
+    }
+
+    @Provides
+    public GenericRepository<FoodItem> provideFoodItemRepository(MongoDBService mongoDBService) {
+        return new MongoDBRepository<>(FoodItem.class, mongoDBService);
     }
 }
