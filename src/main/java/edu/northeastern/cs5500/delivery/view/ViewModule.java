@@ -34,6 +34,7 @@ public class ViewModule {
     @IntoSet
     public View provideReviewView(ReviewView reviewView) {
         return reviewView;
+    }
       
     @Provides
     @IntoSet
