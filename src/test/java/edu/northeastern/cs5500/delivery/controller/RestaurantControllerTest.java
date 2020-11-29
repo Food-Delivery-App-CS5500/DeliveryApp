@@ -25,7 +25,7 @@ public class RestaurantControllerTest {
     public void init() {
         testRestaurant1.setRestaurantName("Best Calzones!");
         testRestaurant1.setRestaurantDescription("Best taste from Italy!");
-        HashMap<ObjectId, FoodItem> testRestaurant1Menu = new HashMap<>();
+        HashMap<String, FoodItem> testRestaurant1Menu = new HashMap<>();
         FoodItem testFood1 = new FoodItem();
         testFood1.setId(new ObjectId());
         testFood1.setFoodItem("Pepperoni Calzone");
@@ -34,14 +34,14 @@ public class RestaurantControllerTest {
         testFood2.setId(new ObjectId());
         testFood2.setFoodItem("Cheese Spinach Calzone");
         testFood2.setFoodPrice(1099);
-        testRestaurant1Menu.put(testFood1.getId(), testFood1);
-        testRestaurant1Menu.put(testFood2.getId(), testFood2);
+        testRestaurant1Menu.put(testFood1.getId().toString(), testFood1);
+        testRestaurant1Menu.put(testFood2.getId().toString(), testFood2);
         testRestaurant1.setRestaurantMenu(testRestaurant1Menu);
         testRestaurant1.setIsActive(true);
 
         testRestaurant2.setRestaurantName("Taj Mahal Indian");
         testRestaurant2.setRestaurantDescription("Best Indian food!");
-        HashMap<ObjectId, FoodItem> testRestaurant2Menu = new HashMap<>();
+        HashMap<String, FoodItem> testRestaurant2Menu = new HashMap<>();
         FoodItem testFood3 = new FoodItem();
         testFood3.setId(new ObjectId());
         testFood3.setFoodItem("Vegetarian meal");
@@ -50,14 +50,14 @@ public class RestaurantControllerTest {
         testFood4.setId(new ObjectId());
         testFood4.setFoodItem("Chicken meal");
         testFood4.setFoodPrice(1299);
-        testRestaurant2Menu.put(testFood3.getId(), testFood3);
-        testRestaurant2Menu.put(testFood4.getId(), testFood4);
+        testRestaurant2Menu.put(testFood3.getId().toString(), testFood3);
+        testRestaurant2Menu.put(testFood4.getId().toString(), testFood4);
         testRestaurant2.setRestaurantMenu(testRestaurant2Menu);
         testRestaurant2.setIsActive(true);
 
         testRestaurant3.setRestaurantName("Ethiopean Best");
         testRestaurant3.setRestaurantDescription("Best Doro wat!");
-        HashMap<ObjectId, FoodItem> testRestaurant3Menu = new HashMap<>();
+        HashMap<String, FoodItem> testRestaurant3Menu = new HashMap<>();
         FoodItem testFood5 = new FoodItem();
         testFood5.setId(new ObjectId());
         testFood5.setFoodItem("Beef meal");
@@ -66,8 +66,8 @@ public class RestaurantControllerTest {
         testFood6.setId(new ObjectId());
         testFood6.setFoodItem("Fish meal");
         testFood6.setFoodPrice(1499);
-        testRestaurant3Menu.put(testFood5.getId(), testFood5);
-        testRestaurant3Menu.put(testFood6.getId(), testFood6);
+        testRestaurant3Menu.put(testFood5.getId().toString(), testFood5);
+        testRestaurant3Menu.put(testFood6.getId().toString(), testFood6);
         testRestaurant3.setRestaurantMenu(testRestaurant3Menu);
         testRestaurant3.setIsActive(true);
     }

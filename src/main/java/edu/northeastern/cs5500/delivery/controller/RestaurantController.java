@@ -41,9 +41,10 @@ public class RestaurantController {
         defaultFood2.setId(new ObjectId());
         defaultFood2.setFoodItem("Cheese Pizza");
         defaultFood2.setFoodPrice(899);
-        HashMap<ObjectId, FoodItem> defaultRestaurant1Menu = new HashMap<>();
+        HashMap<String, FoodItem> defaultRestaurant1Menu = new HashMap<>();
 
         defaultRestaurant1.setRestaurantMenu(defaultRestaurant1Menu);
+        // defaultRestaurant1.setEarnings(0);
         defaultRestaurant1.setIsActive(true);
 
         final Restaurant defaultRestaurant2 = new Restaurant();
@@ -57,16 +58,17 @@ public class RestaurantController {
         defaultFood4.setId(new ObjectId());
         defaultFood4.setFoodItem("Banana, Mango Kale Fusion Smoothie");
         defaultFood4.setFoodPrice(899);
-        HashMap<ObjectId, FoodItem> defaultRestaurant2Menu = new HashMap<>();
+        HashMap<String, FoodItem> defaultRestaurant2Menu = new HashMap<>();
 
         defaultRestaurant2.setRestaurantMenu(defaultRestaurant2Menu);
+        // defaultRestaurant2.setEarnings(0);
         defaultRestaurant2.setIsActive(true);
 
         try {
-            defaultRestaurant1Menu.put(defaultFood1.getId(), defaultFood1);
-            defaultRestaurant1Menu.put(defaultFood2.getId(), defaultFood2);
-            defaultRestaurant2Menu.put(defaultFood3.getId(), defaultFood3);
-            defaultRestaurant2Menu.put(defaultFood4.getId(), defaultFood4);
+            defaultRestaurant1Menu.put(defaultFood1.getId().toString(), defaultFood1);
+            defaultRestaurant1Menu.put(defaultFood2.getId().toString(), defaultFood2);
+            defaultRestaurant2Menu.put(defaultFood3.getId().toString(), defaultFood3);
+            defaultRestaurant2Menu.put(defaultFood4.getId().toString(), defaultFood4);
             addRestaurant(defaultRestaurant1);
             addRestaurant(defaultRestaurant2);
         } catch (Exception e) {

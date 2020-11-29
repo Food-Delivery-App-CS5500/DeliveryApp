@@ -8,8 +8,8 @@ import static spark.Spark.put;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.northeastern.cs5500.delivery.JsonTransformer;
-import edu.northeastern.cs5500.delivery.controller.UserController;
-import edu.northeastern.cs5500.delivery.model.User;
+import edu.northeastern.cs5500.delivery.controller.FoodItemController;
+import edu.northeastern.cs5500.delivery.model.FoodItem;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -17,84 +17,85 @@ import org.bson.types.ObjectId;
 
 @Singleton
 @Slf4j
-public class UserView implements View {
+public class FoodItemView implements View {
 
     @Inject
-    UserView() {}
+    FoodItemView() {}
 
     @Inject JsonTransformer jsonTransformer;
 
-    @Inject UserController userController;
+    @Inject FoodItemController foodItemController;
 
     @Override
     public void register() {
-        log.info("UserView > register");
+        log.info("FoodItemView > register");
 
         get(
-                "/user",
+                "/foodItem",
                 (request, response) -> {
-                    log.debug("/user");
+                    log.debug("/foodItem");
                     response.type("application/json");
-                    return userController.getUsers();
+                    return foodItemController.getFoodItems();
                 },
                 jsonTransformer);
 
         get(
-                "/user/:id",
+                "/foodItem/:id",
                 (request, response) -> {
                     final String paramId = request.params(":id");
-                    log.debug("/user/:id<{}>", paramId);
+                    log.debug("/foodItem/:id<{}>", paramId);
                     final ObjectId id = new ObjectId(paramId);
-                    User user = userController.getUser(id);
-                    if (user == null) {
+                    FoodItem foodItem = foodItemController.getFoodItem(id);
+                    if (foodItem == null) {
                         halt(404);
                     }
                     response.type("application/json");
-                    return user;
+                    return foodItem;
                 },
                 jsonTransformer);
 
         post(
-                "/user",
+                "/foodItem",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    User user = mapper.readValue(request.body(), User.class);
-                    if (!user.isValid()) {
+                    FoodItem foodItem = mapper.readValue(request.body(), FoodItem.class);
+                    if (!foodItem.isValid()) {
                         response.status(400);
                         return "";
                     }
 
                     // Ignore the user-provided ID if there is one
-                    user.setId(null);
-                    user = userController.addUser(user);
+                    foodItem.setId(null);
+                    foodItem = foodItemController.addFoodItem(foodItem);
 
                     // response.redirect(
-                    //         String.format("/user/{}", user.getId().toHexString()), 301);
-                    return user;
+                    //         String.format("/foodItem/{}", foodItem.getId().toHexString()),
+                    // 301);
+                    return foodItem;
                 });
 
         put(
-                "/user",
+                "/foodItem",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    User user = mapper.readValue(request.body(), User.class);
-                    if (!user.isValid()) {
+                    FoodItem foodItem = mapper.readValue(request.body(), FoodItem.class);
+                    if (!foodItem.isValid()) {
                         response.status(400);
                         return "";
                     }
 
-                    userController.updateUser(user);
-                    return user;
+                    foodItemController.updateFoodItem(foodItem);
+                    return foodItem;
                 });
 
         delete(
-                "/user",
+                "/foodItem",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
-                    User user = mapper.readValue(request.body(), User.class);
+                    FoodItem foodItem = mapper.readValue(request.body(), FoodItem.class);
 
-                    userController.deleteUser(user.getId());
-                    return user;
+                    foodItemController.deleteFoodItem(foodItem.getId());
+                    return foodItem;
                 });
     }
 }
