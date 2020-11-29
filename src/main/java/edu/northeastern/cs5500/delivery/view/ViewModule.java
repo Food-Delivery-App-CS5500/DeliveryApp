@@ -23,4 +23,10 @@ public class ViewModule {
     public View provideStatusView(StatusView statusView) {
         return statusView;
     }
+
+    @Provides
+    @IntoSet
+    public View provideReviewView(ReviewView reviewView) {
+        return reviewView;
+    }
 }
