@@ -95,7 +95,8 @@ public class ReviewController {
         if (id != null && reviews.get(id) != null) {
             throw new ExceptionClass("ReviewDuplicateKeyException");
         }
-
+        LocalDate date = LocalDate.now();
+        review.setCreatedTime(date);
         return reviews.add(review);
     }
     /**
