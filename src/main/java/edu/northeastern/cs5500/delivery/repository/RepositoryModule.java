@@ -19,8 +19,8 @@
 //     }
 
 //     @Provides
-//     public GenericRepository<Restaurant> provideRestaurantRepository() {
-//         return new InMemoryRepository<>();
+//     public GenericRestaurantRepository provideRestaurantRepository() {
+//         return new InMemoryRestaurantRepository<>();
 //     }
 
 //     @Provides
@@ -71,9 +71,8 @@ public class RepositoryModule {
     }
 
     @Provides
-    public GenericRepository<Restaurant> provideRestaurantRepository(
-            MongoDBService mongoDBService) {
-        return new MongoDBRepository<>(Restaurant.class, mongoDBService);
+    public GenericRestaurantRepository provideRestaurantRepository(MongoDBService mongoDBService) {
+        return new MongoDBRestaurantRepository(mongoDBService);
     }
 
     @Provides
