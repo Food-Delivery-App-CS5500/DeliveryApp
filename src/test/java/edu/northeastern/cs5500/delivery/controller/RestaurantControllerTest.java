@@ -6,11 +6,13 @@ package edu.northeastern.cs5500.delivery.controller;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import edu.northeastern.cs5500.delivery.model.FoodItem;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
-import edu.northeastern.cs5500.delivery.repository.InMemoryRepository;
+import edu.northeastern.cs5500.delivery.repository.InMemoryRestaurantRepository;
+import java.util.Collection;
 import java.util.HashMap;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,14 +77,14 @@ public class RestaurantControllerTest {
     @Test
     void testRegisterCreatesRestaurants() {
         RestaurantController restaurantController =
-                new RestaurantController(new InMemoryRepository<Restaurant>());
+                new RestaurantController(new InMemoryRestaurantRepository());
         assertThat(restaurantController.getRestaurants()).isNotEmpty();
     }
 
     @Test
     void testRegisterCreatesValidRestaurants() {
         RestaurantController restaurantController =
-                new RestaurantController(new InMemoryRepository<Restaurant>());
+                new RestaurantController(new InMemoryRestaurantRepository());
 
         for (Restaurant restaurant : restaurantController.getRestaurants()) {
             assertWithMessage(restaurant.getRestaurantName()).that(restaurant.isValid()).isTrue();
@@ -90,9 +92,22 @@ public class RestaurantControllerTest {
     }
 
     @Test
+    void testGetRestaurantByName() throws ExceptionClass {
+        RestaurantController restaurantController =
+                new RestaurantController(new InMemoryRestaurantRepository());
+        restaurantController.addRestaurant(testRestaurant1);
+        Collection<Restaurant> results =
+                restaurantController.getRestaurantsByName(testRestaurant1.getRestaurantName());
+        assertTrue(results.size() == 1);
+        for (Restaurant result : results) {
+            assertEquals(testRestaurant1.getRestaurantName(), result.getRestaurantName());
+        }
+    }
+
+    @Test
     void testCanAddRestaurant() throws ExceptionClass {
         RestaurantController restaurantController =
-                new RestaurantController(new InMemoryRepository<Restaurant>());
+                new RestaurantController(new InMemoryRestaurantRepository());
         Restaurant addedRestaurant1 = restaurantController.addRestaurant(testRestaurant1);
         ObjectId addedRestaurant1ID = addedRestaurant1.getId();
         Restaurant addedRestaurantInCollection =
@@ -106,7 +121,7 @@ public class RestaurantControllerTest {
     @Test
     void testCanUpdateRestaurant() throws ExceptionClass {
         RestaurantController restaurantController =
-                new RestaurantController(new InMemoryRepository<Restaurant>());
+                new RestaurantController(new InMemoryRestaurantRepository());
         Restaurant addedRestaurant2 = restaurantController.addRestaurant(testRestaurant2);
         ObjectId addedRestaurant2ID = addedRestaurant2.getId();
 
@@ -119,7 +134,7 @@ public class RestaurantControllerTest {
     @Test
     void testCanDeleteRestaurant() throws ExceptionClass {
         RestaurantController restaurantController =
-                new RestaurantController(new InMemoryRepository<Restaurant>());
+                new RestaurantController(new InMemoryRestaurantRepository());
         Restaurant addedRestaurant3 = restaurantController.addRestaurant(testRestaurant3);
         ObjectId addedRestaurant3ID = addedRestaurant3.getId();
         restaurantController.deleteRestaurant(addedRestaurant3ID);

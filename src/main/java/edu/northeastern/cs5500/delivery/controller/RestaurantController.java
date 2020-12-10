@@ -2,7 +2,7 @@ package edu.northeastern.cs5500.delivery.controller;
 
 import edu.northeastern.cs5500.delivery.model.FoodItem;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
-import edu.northeastern.cs5500.delivery.repository.GenericRepository;
+import edu.northeastern.cs5500.delivery.repository.GenericRestaurantRepository;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.annotation.Nonnull;
@@ -15,10 +15,10 @@ import org.bson.types.ObjectId;
 @Singleton
 @Slf4j
 public class RestaurantController {
-    private final GenericRepository<Restaurant> restaurants;
+    private final GenericRestaurantRepository restaurants;
 
     @Inject
-    RestaurantController(GenericRepository<Restaurant> restaurantRepository) {
+    RestaurantController(GenericRestaurantRepository restaurantRepository) {
         restaurants = restaurantRepository;
 
         log.info("RestaurantController > construct");
@@ -81,6 +81,10 @@ public class RestaurantController {
     public Restaurant getRestaurant(@Nonnull ObjectId uuid) {
         log.debug("RestaurantController > getRestaurants({})", uuid);
         return restaurants.get(uuid);
+    }
+
+    public Collection<Restaurant> getRestaurantsByName(String name) {
+        return restaurants.getRestaurantsByName(name);
     }
 
     @Nonnull

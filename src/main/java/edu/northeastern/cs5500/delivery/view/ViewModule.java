@@ -35,7 +35,7 @@ public class ViewModule {
     public View provideReviewView(ReviewView reviewView) {
         return reviewView;
     }
-      
+
     @Provides
     @IntoSet
     public View provideRestaurantView(RestaurantView restaurantView) {
