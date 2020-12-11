@@ -5,7 +5,6 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import edu.northeastern.cs5500.delivery.model.CreditCard;
 import edu.northeastern.cs5500.delivery.repository.InMemoryRepository;
-import java.time.LocalDate;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,8 +39,8 @@ public class CreditCardControllerTest {
         CreditCard newCard = new CreditCard();
         newCard.setCardNumber(9876543219876543L);
         newCard.setUserName("Emily");
-        LocalDate date = LocalDate.of(2022, 11, 1);
-        newCard.setExpirationDate(date);
+        newCard.setExpirationYear(2022);
+        newCard.setExpirationMonth(11);
 
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
@@ -54,8 +53,8 @@ public class CreditCardControllerTest {
     void testAddInvalidCreditCard() {
         CreditCard newCard = new CreditCard();
         newCard.setCardNumber(2323454567678989L);
-        LocalDate date = LocalDate.of(2024, 4, 2);
-        newCard.setExpirationDate(date);
+        newCard.setExpirationYear(2024);
+        newCard.setExpirationMonth(3);
 
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
@@ -72,8 +71,8 @@ public class CreditCardControllerTest {
         CreditCard newCard = new CreditCard();
         newCard.setCardNumber(6543876543219876L);
         newCard.setUserName("Eric");
-        LocalDate date = LocalDate.of(2024, 4, 4);
-        newCard.setExpirationDate(date);
+        newCard.setExpirationYear(2024);
+        newCard.setExpirationMonth(12);
 
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
@@ -90,8 +89,8 @@ public class CreditCardControllerTest {
         CreditCard newCard = new CreditCard();
         newCard.setCardNumber(1654387654321L);
         newCard.setUserName("Elly");
-        LocalDate date = LocalDate.of(2024, 3, 3);
-        newCard.setExpirationDate(date);
+        newCard.setExpirationYear(2024);
+        newCard.setExpirationMonth(12);
 
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
@@ -107,8 +106,8 @@ public class CreditCardControllerTest {
         CreditCard newCard = new CreditCard();
         newCard.setCardNumber(9012345876543214L);
         newCard.setUserName("Ella");
-        LocalDate date = LocalDate.of(2018, 3, 3);
-        newCard.setExpirationDate(date);
+        newCard.setExpirationYear(2018);
+        newCard.setExpirationMonth(8);
 
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
@@ -124,8 +123,8 @@ public class CreditCardControllerTest {
         CreditCard newCard = new CreditCard();
         newCard.setCardNumber(9876543219876543L);
         newCard.setUserName("Piglet");
-        LocalDate date = LocalDate.of(2022, 11, 1);
-        newCard.setExpirationDate(date);
+        newCard.setExpirationYear(2022);
+        newCard.setExpirationMonth(12);
 
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
@@ -142,8 +141,8 @@ public class CreditCardControllerTest {
         CreditCard newCard = new CreditCard();
         newCard.setCardNumber(5432123454321234L);
         newCard.setUserName("William");
-        LocalDate date = LocalDate.of(2023, 2, 3);
-        newCard.setExpirationDate(date);
+        newCard.setExpirationYear(2022);
+        newCard.setExpirationMonth(12);
 
         CreditCardController cardController =
                 new CreditCardController(new InMemoryRepository<CreditCard>());
