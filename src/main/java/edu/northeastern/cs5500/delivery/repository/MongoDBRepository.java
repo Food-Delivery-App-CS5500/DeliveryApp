@@ -41,9 +41,17 @@ public class MongoDBRepository<T extends Model> implements GenericRepository<T> 
         return collection.findOneAndReplace(eq("_id", item.getId()), item);
     }
 
+    public T updateByUserName(T item, String userName) {
+        return collection.findOneAndReplace(eq("userName", userName), item);
+    }
+
     @Override
     public void delete(ObjectId id) {
         collection.deleteOne(eq("_id", id));
+    }
+
+    public void deleteByUnique(String uniqueId, Object value) {
+        collection.deleteOne(eq(uniqueId, value));
     }
 
     @Override
