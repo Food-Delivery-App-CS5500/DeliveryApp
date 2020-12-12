@@ -36,14 +36,21 @@ public class CreditCardController {
         final CreditCard defaultCreditCard1 = new CreditCard();
         defaultCreditCard1.setCardNumber(1234123412341234L);
         defaultCreditCard1.setUserName("Jay");
-        LocalDate date = LocalDate.of(2022, 12, 1);
-        defaultCreditCard1.setExpirationDate(date);
+        defaultCreditCard1.setExpirationYear(2022);
+        defaultCreditCard1.setExpirationMonth(12);
+        LocalDate today = LocalDate.now();
+        Integer year = today.getYear();
+        Integer month = today.getMonthValue();
+        System.out.println("Year" + year);
+        System.out.println("expY" + defaultCreditCard1.getExpirationYear());
+        System.out.println("Month" + month);
+        System.out.println("expM" + defaultCreditCard1.getExpirationMonth());
 
         final CreditCard defaultCreditCard2 = new CreditCard();
         defaultCreditCard2.setCardNumber(5432543254325432L);
         defaultCreditCard2.setUserName("Yam");
-        LocalDate date2 = LocalDate.of(2022, 1, 1);
-        defaultCreditCard2.setExpirationDate(date2);
+        defaultCreditCard2.setExpirationYear(2022);
+        defaultCreditCard2.setExpirationMonth(12);
 
         try {
             addCreditCard(defaultCreditCard1);
@@ -96,7 +103,7 @@ public class CreditCardController {
             throw new ExceptionClass("CreditCardDuplicateKeyException");
         }
 
-        if (checkCardNumLength(creditCard) != 16 || checkExpirationDate(creditCard) < 0) {
+        if (checkCardNumLength(creditCard) != 16) {
             throw new ExceptionClass("Invliad card number or expiration date!");
         }
 
@@ -111,15 +118,11 @@ public class CreditCardController {
      */
     public void updateCreditCard(@Nonnull CreditCard creditCard) throws Exception {
         log.debug("CreditCardController > updateCreditCard(...)");
-
-        if (checkCardNumLength(creditCard) != 16 || checkExpirationDate(creditCard) < 0) {
-            throw new ExceptionClass("Invalid card number or expiration date!");
-        }
-
-        creditCards.update(creditCard);
+        creditCards.updateByUserName(creditCard, creditCard.getUserName());
     }
+
     /**
-     * Delete a creditcard object.
+     * Delete a creditcard object by id.
      *
      * @param id - the object id of the creditcard being deleted.
      */
@@ -127,22 +130,21 @@ public class CreditCardController {
         log.debug("DeliveryController > deleteDelivery(...)");
         creditCards.delete(id);
     }
+
+    /**
+     * Delete a creditcard object by cardNumber.
+     *
+     * @param id - the object id of the creditcard being deleted.
+     */
+    public void deleteCreditCard(@Nonnull String uniqueId, Object cardnumber) {
+        log.debug("DeliveryController > deleteDelivery(...)");
+        creditCards.deleteByUnique(uniqueId, cardnumber);
+    }
     /** Count the number of creditcard objects in the collection. */
     public Long count() {
         return creditCards.count();
     }
-    /**
-     * Check if the expiration date on credit card in valid.
-     *
-     * @param creditCard - a creditCard object being checked.
-     * @return 0 if both dates are equal, positive value if “this date” is greater than the
-     *     otherDate, otherwise negative value.
-     */
-    private Integer checkExpirationDate(CreditCard creditCard) {
-        LocalDate expDate = creditCard.getExpirationDate();
-        LocalDate now = LocalDate.now();
-        return expDate.compareTo(now);
-    }
+
     /**
      * Check if the length of a creditcard number if 16 digits.
      *

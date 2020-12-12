@@ -33,6 +33,7 @@ public class CreditCardView implements View {
         get(
                 "/creditcard",
                 (request, response) -> {
+                    System.out.println("Get");
                     log.debug("/creditcard");
                     response.type("application/json");
                     return creditCardController.getCreditCards();
@@ -55,7 +56,7 @@ public class CreditCardView implements View {
                 jsonTransformer);
 
         post(
-                "/creditcard",
+                "/creditcardcreate",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     CreditCard card = mapper.readValue(request.body(), CreditCard.class);
@@ -68,31 +69,31 @@ public class CreditCardView implements View {
                     card.setId(null);
                     card = creditCardController.addCreditCard(card);
 
-                    // response.redirect(
-                    //        String.format("/delivery/{}", delivery.getId().toHexString()), 301);
-                    return card;
+                    return "Created Credit Card";
                 });
 
         put(
-                "/creditcard",
+                "/creditcardupdate",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     CreditCard card = mapper.readValue(request.body(), CreditCard.class);
-                    if (!card.isValid()) {
+                    if (card.getUserName() == null) {
+                        System.out.println("not valid");
                         response.status(400);
                         return "";
                     }
                     creditCardController.updateCreditCard(card);
-                    return card;
+                    return "Credit Card Updated";
                 });
 
         delete(
-                "/creditcard",
+                "/creditcarddelete",
                 (request, response) -> {
                     ObjectMapper mapper = new ObjectMapper();
                     CreditCard card = mapper.readValue(request.body(), CreditCard.class);
-                    creditCardController.deleteCreditCard(card.getId());
-                    return card;
+                    Long cardNumber = card.getCardNumber();
+                    creditCardController.deleteCreditCard("cardNumber", cardNumber);
+                    return "Deleted Credit Card";
                 });
     }
 }

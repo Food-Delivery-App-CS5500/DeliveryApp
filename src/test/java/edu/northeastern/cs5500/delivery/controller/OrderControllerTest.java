@@ -12,7 +12,6 @@ import edu.northeastern.cs5500.delivery.model.Order;
 import edu.northeastern.cs5500.delivery.model.OrderStatus;
 import edu.northeastern.cs5500.delivery.model.Restaurant;
 import edu.northeastern.cs5500.delivery.repository.InMemoryRepository;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import org.bson.types.ObjectId;
@@ -56,7 +55,8 @@ public class OrderControllerTest {
         testOrder1.setScheduleDelivery(LocalDateTime.of(2020, 11, 19, 18, 30, 20));
         CreditCard defaultOrderPaymentCard1 = new CreditCard();
         defaultOrderPaymentCard1.setCardNumber(4141262631310101L);
-        defaultOrderPaymentCard1.setExpirationDate(LocalDate.of(2024, 4, 2));
+        defaultOrderPaymentCard1.setExpirationYear(2024);
+        defaultOrderPaymentCard1.setExpirationMonth(12);
         defaultOrderPaymentCard1.setUserName("Tisha Tenzing");
         testOrder1.setPaymentCard(defaultOrderPaymentCard1);
         testOrder1.setOrderFoodItems(testOrder1Items);
@@ -72,7 +72,8 @@ public class OrderControllerTest {
         testOrder2.setScheduleDelivery(LocalDateTime.of(2020, 12, 19, 17, 32, 25));
         CreditCard defaultOrderPaymentCard2 = new CreditCard();
         defaultOrderPaymentCard2.setCardNumber(8888262600110101L);
-        defaultOrderPaymentCard2.setExpirationDate(LocalDate.of(2024, 8, 2));
+        defaultOrderPaymentCard2.setExpirationYear(2024);
+        defaultOrderPaymentCard2.setExpirationMonth(12);
         defaultOrderPaymentCard2.setUserName("Giana Hill");
         testOrder2.setPaymentCard(defaultOrderPaymentCard2);
         testOrder2.setOrderFoodItems(testOrder2Items);
