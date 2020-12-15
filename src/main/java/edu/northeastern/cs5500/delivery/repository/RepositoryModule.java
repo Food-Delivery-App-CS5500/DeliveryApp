@@ -24,8 +24,8 @@
 //     }
 
 //     @Provides
-//     public GenericRepository<CreditCard> provideCreditCardRepository() {
-//         return new InMemoryRepository<>();
+//     public GenericCreditCardRepository provideCreditCardRepository() {
+//         return new InMemoryCreditCardRepository<>();
 //     }
 
 //     @Provides
@@ -76,9 +76,8 @@ public class RepositoryModule {
     }
 
     @Provides
-    public GenericRepository<CreditCard> provideCreditCardRepository(
-            MongoDBService mongoDBService) {
-        return new MongoDBRepository<>(CreditCard.class, mongoDBService);
+    public GenericCreditCardRepository provideCreditCardRepository(MongoDBService mongoDBService) {
+        return new MongoDBCreditCardRepository(mongoDBService);
     }
 
     @Provides

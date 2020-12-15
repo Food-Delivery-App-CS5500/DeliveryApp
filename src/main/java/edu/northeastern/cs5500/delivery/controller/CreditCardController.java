@@ -1,8 +1,7 @@
 package edu.northeastern.cs5500.delivery.controller;
 
 import edu.northeastern.cs5500.delivery.model.CreditCard;
-import edu.northeastern.cs5500.delivery.repository.GenericRepository;
-import java.time.LocalDate;
+import edu.northeastern.cs5500.delivery.repository.GenericCreditCardRepository;
 import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -15,14 +14,14 @@ import org.bson.types.ObjectId;
 @Singleton
 @Slf4j
 public class CreditCardController {
-    private final GenericRepository<CreditCard> creditCards;
+    private final GenericCreditCardRepository creditCards;
     /**
      * Contructor for creditcard controller using dagger.
      *
      * @param creditCardRepository - a collection of creditcards.
      */
     @Inject
-    CreditCardController(GenericRepository<CreditCard> creditCardRepository) {
+    CreditCardController(GenericCreditCardRepository creditCardRepository) {
         creditCards = creditCardRepository;
 
         log.info("CreditCardController > construct");
@@ -38,13 +37,6 @@ public class CreditCardController {
         defaultCreditCard1.setUserName("Jay");
         defaultCreditCard1.setExpirationYear(2022);
         defaultCreditCard1.setExpirationMonth(12);
-        LocalDate today = LocalDate.now();
-        Integer year = today.getYear();
-        Integer month = today.getMonthValue();
-        System.out.println("Year" + year);
-        System.out.println("expY" + defaultCreditCard1.getExpirationYear());
-        System.out.println("Month" + month);
-        System.out.println("expM" + defaultCreditCard1.getExpirationMonth());
 
         final CreditCard defaultCreditCard2 = new CreditCard();
         defaultCreditCard2.setCardNumber(5432543254325432L);
@@ -72,6 +64,19 @@ public class CreditCardController {
     public CreditCard getCreditCard(@Nonnull ObjectId id) throws Exception {
         log.debug("CreditCardController > getCard({})", id);
         return creditCards.get(id);
+    }
+
+    /**
+     * Retrieve a creditcard object from database.
+     *
+     * @param id - object id of a creditcard object
+     * @return CreditCard - return a creditcard object
+     * @throws Exception - throws exception when object id does not exist in database
+     */
+    @Nullable
+    public Collection<CreditCard> getAllCardsByUserName(@Nonnull String userName) throws Exception {
+        log.debug("CreditCardController > getAllByUserName({})", userName);
+        return creditCards.getAllByUserName(userName);
     }
 
     /**
@@ -136,9 +141,9 @@ public class CreditCardController {
      *
      * @param id - the object id of the creditcard being deleted.
      */
-    public void deleteCreditCard(@Nonnull String uniqueId, Object cardnumber) {
+    public void deleteCreditCardByCardNumber(@Nonnull Long cardnumber, String userName) {
         log.debug("DeliveryController > deleteDelivery(...)");
-        creditCards.deleteByUnique(uniqueId, cardnumber);
+        creditCards.deleteByCardNumber(cardnumber, userName);
     }
     /** Count the number of creditcard objects in the collection. */
     public Long count() {
