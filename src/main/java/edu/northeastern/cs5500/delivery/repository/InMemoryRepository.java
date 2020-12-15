@@ -53,15 +53,4 @@ public class InMemoryRepository<T extends Model> implements GenericRepository<T>
     public long count() {
         return collection.size();
     }
-
-    @Override
-    public T updateByUserName(T item, String userName) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void deleteByUnique(String uniqueId, Object value) {
-        ;
-    }
 }

@@ -11,11 +11,7 @@ public interface GenericRepository<T> {
 
     public T update(@Nonnull T item);
 
-    public T updateByUserName(@Nonnull T item, String name);
-
     public void delete(@Nonnull ObjectId id);
-
-    public void deleteByUnique(String uniqueId, Object value);
 
     public Collection<T> getAll();
 

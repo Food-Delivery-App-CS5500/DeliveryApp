@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.northeastern.cs5500.delivery.JsonTransformer;
 import edu.northeastern.cs5500.delivery.controller.CreditCardController;
 import edu.northeastern.cs5500.delivery.model.CreditCard;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,6 @@ public class CreditCardView implements View {
         get(
                 "/creditcard",
                 (request, response) -> {
-                    System.out.println("Get");
                     log.debug("/creditcard");
                     response.type("application/json");
                     return creditCardController.getCreditCards();
@@ -54,6 +54,23 @@ public class CreditCardView implements View {
                     return card;
                 },
                 jsonTransformer);
+        get(
+                "/creditcardname/:username",
+                (request, response) -> {
+                    System.out.println("Get By username1");
+                    final String paramName = request.params(":username");
+                    System.out.println("Get By username");
+                    log.debug("/creditcard/:username<{}>", paramName);
+                    Collection<CreditCard> cards =
+                            creditCardController.getAllCardsByUserName(paramName);
+
+                    if (cards == null) {
+                        return "You have not add any cards yet";
+                    }
+                    response.type("application/json");
+                    return cards;
+                },
+                jsonTransformer);
 
         post(
                 "/creditcardcreate",
@@ -62,7 +79,7 @@ public class CreditCardView implements View {
                     CreditCard card = mapper.readValue(request.body(), CreditCard.class);
                     if (!card.isValid()) {
                         response.status(400);
-                        return "";
+                        return "Invalid";
                     }
 
                     // Ignore the user-provided ID if there is one
@@ -92,7 +109,8 @@ public class CreditCardView implements View {
                     ObjectMapper mapper = new ObjectMapper();
                     CreditCard card = mapper.readValue(request.body(), CreditCard.class);
                     Long cardNumber = card.getCardNumber();
-                    creditCardController.deleteCreditCard("cardNumber", cardNumber);
+                    String userName = card.getUserName();
+                    creditCardController.deleteCreditCardByCardNumber(cardNumber, userName);
                     return "Deleted Credit Card";
                 });
     }
