@@ -37,6 +37,7 @@ public class ReviewControllerTest {
         Review newReview = new Review();
         newReview.setComment("There are better ones out there...");
         newReview.setUserName("DJ");
+        newReview.setRestaurantName("QFC");
         newReview.setRating(3.0);
         LocalDate date = LocalDate.of(2018, 6, 3);
         newReview.setCreatedTime(date);
@@ -51,6 +52,7 @@ public class ReviewControllerTest {
     void testAddInvalidReviewNoComment() {
         Review newReview = new Review();
         newReview.setUserName("Tororo");
+        newReview.setRestaurantName("Korean Food");
         newReview.setRating(4.5);
         LocalDate date = LocalDate.of(2019, 6, 5);
         newReview.setCreatedTime(date);
@@ -69,6 +71,24 @@ public class ReviewControllerTest {
         Review newReview = new Review();
         newReview.setComment("I love their dessert. Not too sweet!");
         newReview.setUserName("Ku");
+        newReview.setRestaurantName("Grab a Bite");
+        LocalDate date = LocalDate.of(2019, 5, 5);
+        newReview.setCreatedTime(date);
+
+        ReviewController reviewController = new ReviewController(new InMemoryRepository<Review>());
+
+        Assertions.assertThrows(
+                Exception.class,
+                () -> {
+                    reviewController.addReview(newReview);
+                });
+    }
+
+    @Test
+    void testAddInvalidReviewRestaurantName() {
+        Review newReview = new Review();
+        newReview.setComment("I love their chocolate. Not too sweet!");
+        newReview.setUserName("Jim");
         LocalDate date = LocalDate.of(2019, 5, 5);
         newReview.setCreatedTime(date);
 
@@ -86,6 +106,7 @@ public class ReviewControllerTest {
         Review newReview = new Review();
         newReview.setComment("Too Yuumy...");
         newReview.setUserName("Shaun");
+        newReview.setRestaurantName("BestBite");
         newReview.setRating(4.0);
         LocalDate date = LocalDate.of(2020, 10, 7);
         newReview.setCreatedTime(date);
@@ -104,6 +125,7 @@ public class ReviewControllerTest {
         Review newReview = new Review();
         newReview.setComment("Just ok, nothing special.");
         newReview.setUserName("Henry");
+        newReview.setRestaurantName("Ymmy");
         newReview.setRating(3.3);
         LocalDate date = LocalDate.of(2020, 11, 1);
         newReview.setCreatedTime(date);
@@ -122,6 +144,7 @@ public class ReviewControllerTest {
         Review newReview = new Review();
         newReview.setComment("Too cold for ice cream!");
         newReview.setUserName("Sunny");
+        newReview.setRestaurantName("Yee");
         newReview.setRating(4.5);
         LocalDate date = LocalDate.of(2020, 7, 21);
         newReview.setCreatedTime(date);
