@@ -34,15 +34,17 @@ public class ReviewController {
         log.info("ReviewController > construct > adding default Reviews");
 
         final Review defaultReview1 = new Review();
-        defaultReview1.setComment("This place has the best fried chicken ever!");
+        defaultReview1.setComment("This place has the best fried chicken pizza ever!");
         defaultReview1.setUserName("Jay");
+        defaultReview1.setRestaurantName("Best Pizza");
         defaultReview1.setRating(4.8);
         LocalDate date = LocalDate.of(2019, 10, 10);
         defaultReview1.setCreatedTime(date);
 
         final Review defaultReview2 = new Review();
-        defaultReview2.setComment("There was a hair in my soup...");
+        defaultReview2.setComment("There was a hair in my smoothie...");
         defaultReview2.setUserName("Ken");
+        defaultReview2.setRestaurantName("Salads and Smoothies");
         defaultReview2.setRating(1.0);
         LocalDate date2 = LocalDate.of(2018, 12, 26);
         defaultReview2.setCreatedTime(date2);

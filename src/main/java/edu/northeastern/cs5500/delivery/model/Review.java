@@ -13,7 +13,7 @@ import org.bson.types.ObjectId;
 public class Review implements Model {
     private ObjectId id;
     private String userName;
-    private ObjectId restaurantId;
+    private String restaurantName;
     private LocalDate createdTime;
     private String comment;
     private Double rating;
@@ -21,6 +21,10 @@ public class Review implements Model {
     /** @return true if this Review is valid */
     @JsonIgnore
     public boolean isValid() {
-        return !comment.isEmpty() && rating >= 0.0 && rating <= 5.0;
+        return !userName.isEmpty()
+                && !restaurantName.isEmpty()
+                && !comment.isEmpty()
+                && rating >= 0.0
+                && rating <= 5.0;
     }
 }
