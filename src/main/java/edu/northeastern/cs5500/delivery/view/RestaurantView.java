@@ -58,7 +58,7 @@ public class RestaurantView implements View {
                 jsonTransformer);
 
         get(
-                "/restaurants/:searchString",
+                "/restaurant/:searchString",
                 (request, response) -> {
                     final String searchString = request.params(":searchString");
                     log.debug("/restaurant/:searchString<{}>", searchString);
