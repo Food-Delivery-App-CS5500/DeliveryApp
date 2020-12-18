@@ -21,7 +21,7 @@ public class MongoDBRestaurantRepository extends MongoDBRepository<Restaurant>
     public Collection<Restaurant> getRestaurantsByName(String searchString) {
         // Create regex string from search string
         Document regexQuery = new Document();
-        regexQuery.append("$regex", "^(?)" + Pattern.quote(searchString));
+        regexQuery.append("$regex", ".*" + Pattern.quote(searchString) + ".*");
         regexQuery.append("$options", "i");
 
         Document findQuery = new Document();
