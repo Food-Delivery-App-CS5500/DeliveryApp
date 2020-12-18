@@ -14,6 +14,7 @@ public class MongoDBRestaurantRepository extends MongoDBRepository<Restaurant>
     @Inject
     public <T> MongoDBRestaurantRepository(MongoDBService mongoDBService) {
         super(Restaurant.class, mongoDBService);
+        collection.createIndex(new Document("restaurantName", "text"));
     }
 
     @Override
